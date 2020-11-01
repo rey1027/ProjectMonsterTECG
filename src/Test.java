@@ -30,8 +30,8 @@ public class Test extends Application {
         Label labVida = new Label("VIDA :");
         Label labMana = new Label("MANA :");
 
-        Image image1 = new Image(getClass().getResourceAsStream("Images/E_Gandling.png"));
-        Image imageMano = new Image(getClass().getResourceAsStream("Images/E_Sucubo.png"));
+        Image image1 = new Image(getClass().getResourceAsStream("Images/E_Micro.png"));
+        Image imageMano = new Image(getClass().getResourceAsStream("Images/E_Sacerdotisa.png"));
         Image imagePila = new Image(getClass().getResourceAsStream("Images/PilaDeCartas.png"));
         Image imageButleft = new Image(getClass().getResourceAsStream("Images/BotonA.png"));
         Image imageButright = new Image(getClass().getResourceAsStream("Images/BotonS.png"));
