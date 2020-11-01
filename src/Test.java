@@ -19,48 +19,93 @@ public class Test extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         AnchorPane Contenedor = new AnchorPane();
+
         TextField input = new TextField();
+        input.setMinSize(285,10);
+
         TextArea Mensajes = new TextArea();
         Mensajes.setPrefHeight(100);
         Mensajes.setId("textarea-messages");
+
+        Label labVida = new Label("VIDA :");
+        Label labMana = new Label("MANA :");
+
         Image image1 = new Image(getClass().getResourceAsStream("Images/E_Gandling.png"));
-        Image image2 = new Image(getClass().getResourceAsStream("Images/E_Sucubo.png"));
-        Image image3 = new Image(getClass().getResourceAsStream("Images/PilasDeCartas.png"));
+        Image imageMano = new Image(getClass().getResourceAsStream("Images/E_Sucubo.png"));
+        Image imagePila = new Image(getClass().getResourceAsStream("Images/PilaDeCartas.png"));
+        Image imageButleft = new Image(getClass().getResourceAsStream("Images/BotonA.png"));
+        Image imageButright = new Image(getClass().getResourceAsStream("Images/BotonS.png"));
 
         ImageView imageView = new ImageView(image1);
-        imageView.setFitHeight(150);
-        imageView.setFitWidth(100);
+        imageView.setFitHeight(265);
+        imageView.setFitWidth(190);
         imageView.setX(100);
-        imageView.setY(100);
+        imageView.setY(5);
 
-        ImageView pilaCartas = new ImageView(image3);
-        ImageView imageView2 = new ImageView(image2);
+        ImageView pilaCartas = new ImageView(imagePila);
+        pilaCartas.setFitWidth(130);
+        pilaCartas.setFitHeight(120);
 
-        Button butleft = new Button("<<<");
-        Button butright = new Button(">>>");
+        ImageView IVmano = new ImageView(imageMano);
+        IVmano.setFitHeight(150);
+        IVmano.setFitWidth(110);
+        IVmano.setX(135);
+        IVmano.setY(295);
+
+        ImageView IVanterior = new ImageView(imageButleft);
+        IVanterior.setFitHeight(30);
+        IVanterior.setFitWidth(60);
+
+        ImageView IVsiguiente = new ImageView(imageButright);
+        IVsiguiente.setFitHeight(30);
+        IVsiguiente.setFitWidth(60);
+
+
+        Button butleft = new Button();
+        butleft.setGraphic(IVanterior);
+
+        Button butright = new Button();
+        butright.setGraphic(IVsiguiente);
 
         Button invocar = new Button("Invocar");
+        invocar.setMinSize(85,37);
+
         Button pila = new Button("Tomar carta");
+        pila.setMinSize(24,37);
+
         Button historial = new Button("Historial");
+        historial.setMinSize(80,37);
+
         Button salto = new Button("Saltar Turno");
         //salto.setGraphic(imageView);
+        salto.setMinSize(24,37);
 
-        HBox hBoxJugar1 = new HBox(70,butleft,butright);
+        HBox hBoxJugar1 = new HBox(128,butleft,butright);
 
-        HBox hBoxJugar2 = new HBox(30,invocar,salto);
+        HBox hBoxJugar2 = new HBox(20,invocar,salto);
 
-        VBox vBoxInfo = new VBox(30,historial);
+        VBox vBoxInfo = new VBox(30,historial,labVida,labMana);
 
-        VBox vBoxPila = new VBox(15,pila);
+        VBox vBoxPila = new VBox(15,pila,pilaCartas);
 
-        Contenedor.getChildren().addAll(hBoxJugar1,hBoxJugar2,vBoxInfo,vBoxPila);
+        Contenedor.getChildren().addAll(hBoxJugar1,hBoxJugar2,vBoxInfo,vBoxPila,input,imageView,IVmano);
 
-        AnchorPane.setLeftAnchor(hBoxJugar1,25d);
-        AnchorPane.setBottomAnchor(hBoxJugar1,25d);
-        AnchorPane.setLeftAnchor(hBoxJugar2,35d);
-        AnchorPane.setBottomAnchor(hBoxJugar2,10d);
+        AnchorPane.setLeftAnchor(hBoxJugar1,53d);
+        AnchorPane.setBottomAnchor(hBoxJugar1,110d);
 
-        Scene scene = new Scene(Contenedor,500,400);
+        AnchorPane.setLeftAnchor(hBoxJugar2,100d);
+        AnchorPane.setBottomAnchor(hBoxJugar2,16d);
+
+        AnchorPane.setRightAnchor(vBoxPila,15d);
+        AnchorPane.setBottomAnchor(vBoxPila,15d);
+
+        AnchorPane.setLeftAnchor(input,48d);
+        AnchorPane.setBottomAnchor(input,205d);
+
+        AnchorPane.setTopAnchor(vBoxInfo,50d);
+        AnchorPane.setRightAnchor(vBoxInfo,70d);
+
+        Scene scene = new Scene(Contenedor,550,500);
         primaryStage.setScene(scene);
         primaryStage.show();
 
