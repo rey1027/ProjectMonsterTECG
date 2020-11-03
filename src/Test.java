@@ -22,24 +22,25 @@ public class Test extends Application {
 
         TextField input = new TextField();
         input.setMinSize(285,10);
-
         TextArea Mensajes = new TextArea();
+
+        input.setMinSize(285,10);
         Mensajes.setPrefHeight(100);
         Mensajes.setId("textarea-messages");
 
         Label labVida = new Label("VIDA :");
         Label labMana = new Label("MANA :");
 
-        Image image1 = new Image(getClass().getResourceAsStream("Images/E_Micro.png"));
-        Image imageMano = new Image(getClass().getResourceAsStream("Images/E_Sacerdotisa.png"));
+        Image image1 = new Image(getClass().getResourceAsStream("Images/E_Reina.png"));
+        Image imageMano = new Image(getClass().getResourceAsStream("Images/E_Gigante.png"));
         Image imagePila = new Image(getClass().getResourceAsStream("Images/PilaDeCartas.png"));
         Image imageButleft = new Image(getClass().getResourceAsStream("Images/BotonA.png"));
         Image imageButright = new Image(getClass().getResourceAsStream("Images/BotonS.png"));
 
         ImageView imageView = new ImageView(image1);
-        imageView.setFitHeight(265);
-        imageView.setFitWidth(190);
-        imageView.setX(100);
+        imageView.setFitHeight(285);
+        imageView.setFitWidth(650);
+        imageView.setX(-125);
         imageView.setY(5);
 
         ImageView pilaCartas = new ImageView(imagePila);
@@ -47,10 +48,10 @@ public class Test extends Application {
         pilaCartas.setFitHeight(120);
 
         ImageView IVmano = new ImageView(imageMano);
-        IVmano.setFitHeight(150);
-        IVmano.setFitWidth(110);
-        IVmano.setX(135);
-        IVmano.setY(295);
+        IVmano.setFitHeight(185);
+        IVmano.setFitWidth(430);
+        IVmano.setX(-19);
+        IVmano.setY(300);
 
         ImageView IVanterior = new ImageView(imageButleft);
         IVanterior.setFitHeight(30);
@@ -82,7 +83,7 @@ public class Test extends Application {
 
         HBox hBoxJugar1 = new HBox(128,butleft,butright);
 
-        HBox hBoxJugar2 = new HBox(20,invocar,salto);
+        HBox hBoxJugar2 = new HBox(128,invocar,salto);
 
         VBox vBoxInfo = new VBox(30,historial,labVida,labMana);
 
@@ -93,8 +94,8 @@ public class Test extends Application {
         AnchorPane.setLeftAnchor(hBoxJugar1,53d);
         AnchorPane.setBottomAnchor(hBoxJugar1,110d);
 
-        AnchorPane.setLeftAnchor(hBoxJugar2,100d);
-        AnchorPane.setBottomAnchor(hBoxJugar2,16d);
+        AnchorPane.setLeftAnchor(hBoxJugar2,42d);
+        AnchorPane.setBottomAnchor(hBoxJugar2,40d);
 
         AnchorPane.setRightAnchor(vBoxPila,15d);
         AnchorPane.setBottomAnchor(vBoxPila,15d);
@@ -104,6 +105,8 @@ public class Test extends Application {
 
         AnchorPane.setTopAnchor(vBoxInfo,50d);
         AnchorPane.setRightAnchor(vBoxInfo,70d);
+
+
 
         Scene scene = new Scene(Contenedor,550,500);
         primaryStage.setScene(scene);

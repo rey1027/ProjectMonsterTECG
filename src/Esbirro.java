@@ -6,4 +6,11 @@ public class Esbirro extends Carta{
         this.ataque=ataque;
     }
 
+    public int getAtaque() {
+        return ataque;
+    }
+
+    public void setAtaque(int ataque) {
+        this.ataque = ataque;
+    }
 }
