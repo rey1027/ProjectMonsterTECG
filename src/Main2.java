@@ -57,7 +57,7 @@ public class Main2 extends Application {
         AnchorPane Contenedor = new AnchorPane();
 
         input.setMinSize(285,10);
-        Mensajes.setPrefHeight(100);
+        Mensajes.setPrefHeight(25);
         Mensajes.setId("textarea-messages");
 
         Image image1 = new Image(getClass().getResourceAsStream("Images/E_Reina.png"));
@@ -117,7 +117,10 @@ public class Main2 extends Application {
 
         VBox vBoxPila = new VBox(15,pila,pilaCartas);
 
-        Contenedor.getChildren().addAll(hBoxJugar1,hBoxJugar2,vBoxInfo,vBoxPila,input,IVspecial,IVmano);
+        Contenedor.getChildren().addAll(hBoxJugar1,hBoxJugar2,vBoxInfo,vBoxPila,input,IVspecial,IVmano,Mensajes);
+
+        AnchorPane.setLeftAnchor(Mensajes,42d);
+        AnchorPane.setTopAnchor(Mensajes,40d);
 
         AnchorPane.setLeftAnchor(hBoxJugar1,53d);
         AnchorPane.setBottomAnchor(hBoxJugar1,110d);
@@ -336,9 +339,9 @@ public class Main2 extends Application {
         labMana.setText("MANA: "+jugador1.getMana());
         return new Servidor(p2, data->{
             Platform.runLater(() ->{
-                input.setText("mjm mjm");
                 //IVspecial.setImage(imagePrueba);
                 Mensajes.appendText(data.toString()+"\n");
+
 
 
             });
@@ -358,7 +361,29 @@ public class Main2 extends Application {
             Platform.runLater(() ->{
 
                 //IVspecial.setImage(imagePrueba);
+
+
+                System.out.println(data.toString());
+                if (data.equals("Servidor: 1")){
+                    System.out.println("YIIII");
+                    jugador2.recibirAtaque(200);
+                    jugador2.gastarMana(100);
+                    jugador2.regenMana();
+
+
+                }
+                if ("Servidor: 1".equals(data.toString())){
+                    System.out.println("JAAAA");
+                    jugador2.recibirAtaque(200);
+                    jugador2.gastarMana(100);
+
+
+                }
+                labVida.setText("VIDA: "+jugador2.getVida());
+                labMana.setText("MANA: "+jugador2.getMana());
                 Mensajes.appendText(data.toString()+"\n");
+
+
 
             });
         });

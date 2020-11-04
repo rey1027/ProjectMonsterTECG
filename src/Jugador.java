@@ -20,6 +20,8 @@ public class Jugador {
         }
     }
 
+    public void gastarMana(int costo) { this.mana -= costo; }
+
     public String getVida() {
         String vidaString = Integer.toString(vida);
         return vidaString;
