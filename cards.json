@@ -6,7 +6,7 @@
       "Ataque": 140 ,
       "Tipo": "Esbirro",
       "Mana" : 50,
-      "Imagen": "E_Gandling.png"
+      "Imagen": "Images/E_Gandling.png"
     },
     "Gigante" :
     {
@@ -14,7 +14,7 @@
       "Ataque": 200 ,
       "Tipo": "Esbirro",
       "Mana" : 200,
-      "Imagen": "E_Gigante.png"
+      "Imagen": "Images/E_Gigante.png"
     },
     "Gran" :
     {
@@ -22,7 +22,7 @@
       "Ataque": 170 ,
       "Tipo": "Esbirro",
       "Mana" : 100,
-      "Imagen": "E_Gran.png"
+      "Imagen": "Images/E_Gran.png"
     },
     "Mal" :
     {
@@ -30,7 +30,7 @@
       "Ataque": 510 ,
       "Tipo": "Esbirro",
       "Mana" : 200,
-      "Imagen": "E_Mal.png"
+      "Imagen": "Images/E_Mal.png"
     },
     "Micro" :
     {
@@ -38,7 +38,7 @@
       "Ataque": 70 ,
       "Tipo": "Esbirro",
       "Mana" : 10,
-      "Imagen": "E_Micro.png"
+      "Imagen": "Images/E_Micro.png"
     },
     "Pescador" :
     {
@@ -46,7 +46,7 @@
       "Ataque": 100 ,
       "Tipo": "Esbirro",
       "Mana" : 100,
-      "Imagen": "E_Pescador.png"
+      "Imagen": "Images/E_Pescador.png"
     },
     "Plastabot" :
     {
@@ -54,7 +54,7 @@
       "Ataque": 50 ,
       "Tipo": "Esbirro",
       "Mana" : 50,
-      "Imagen": "E_Plastabot.png"
+      "Imagen": "Images/E_Plastabot.png"
     },
     "Reina" :
     {
@@ -62,7 +62,7 @@
       "Ataque": 150,
       "Tipo": "Esbirro",
       "Mana" : 70,
-      "Imagen": "E_Reina.png"
+      "Imagen": "Images/E_Reina.png"
     },
     "Rey" :
     {
@@ -70,7 +70,7 @@
       "Ataque": 300 ,
       "Tipo": "Esbirro",
       "Mana" : 150,
-      "Imagen": "E_Rey.png"
+      "Imagen": "Images/E_Rey.png"
     },
     "Sacerdotisa" :
     {
@@ -78,7 +78,7 @@
       "Ataque": 100 ,
       "Tipo": "Esbirro",
       "Mana" : 30,
-      "Imagen": "E_Sacerdotisa.png"
+      "Imagen": "Images/E_Sacerdotisa.png"
     },
     "Congelar" :
     {
@@ -86,7 +86,7 @@
       "Ataque": "Congela al rival un turno" ,
       "Tipo": "Hechizo",
       "Mana" : 60,
-      "Imagen": "H_Congelar.png"
+      "Imagen": "Images/H_Congelar.png"
     },
     "Curar" :
     {
@@ -94,7 +94,7 @@
       "Ataque": 200 ,
       "Tipo": "Hechizo",
       "Mana" : 60,
-      "Imagen": "H_Curar.png"
+      "Imagen": "Images/H_Curar.png"
     },
     "Explosión" :
     {
@@ -102,7 +102,7 @@
       "Ataque": "Duplica el siguente ataque" ,
       "Tipo": "Hechizo",
       "Mana" : 100,
-      "Imagen": "H_Esplosión.png"
+      "Imagen": "Images/H_Esplosión.png"
     },
     "Favor" :
     {
@@ -110,7 +110,7 @@
       "Ataque": "Añade una carta a tu mano y 100 más para tu siguente ataque" ,
       "Tipo": "Hechizo",
       "Mana" : 25,
-      "Imagen": "H_Favor.png"
+      "Imagen": "Images/H_Favor.png"
     },
     "Forma" :
     {
@@ -118,7 +118,7 @@
       "Ataque": "Carta Aleatoria" ,
       "Tipo": "Hechizo",
       "Mana" : 70,
-      "Imagen": "H_Forma.png"
+      "Imagen": "Images/H_Forma.png"
     },
     "Matriz" :
     {
@@ -126,7 +126,7 @@
       "Ataque": "Te protege un turno" ,
       "Tipo": "Hechizo",
       "Mana" : 80,
-      "Imagen": "H_Matriz.png"
+      "Imagen": "Images/H_Matriz.png"
     },
     "PoderSupremo" :
     {
@@ -134,7 +134,7 @@
       "Ataque": "Poder supremo 3 cartas sin importar maná" ,
       "Tipo": "Hechizo",
       "Mana" : 200,
-      "Imagen": "H_PoderSupremo.png"
+      "Imagen": "Images/H_PoderSupremo.png"
     },
     "Portal" :
     {
@@ -142,7 +142,7 @@
       "Ataque": 100 ,
       "Tipo": "Hechizo",
       "Mana" : 50,
-      "Imagen": "H_Portal.png"
+      "Imagen": "Images/H_Portal.png"
     },
     "Purificar" :
     {
@@ -150,7 +150,7 @@
       "Ataque": 50 ,
       "Tipo": "Hechizo",
       "Mana" : 0,
-      "Imagen": "H_Purificar.png"
+      "Imagen": "Images/H_Purificar.png"
     },
     "Roba" :
     {
@@ -158,7 +158,7 @@
       "Ataque": "Roba una carta aleatoria" ,
       "Tipo": "Hechizo",
       "Mana" : 60,
-      "Imagen": "H_Roba.png"
+      "Imagen": "Images/H_Roba.png"
     },
     "Almacen" :
     {
@@ -166,7 +166,7 @@
       "Ataque": "Al jugar 10 hechizos ganas la partida" ,
       "Tipo": "Secreto",
       "Mana" : 50,
-      "Imagen": "S_Almacen.png"
+      "Imagen": "Images/S_Almacen.png"
     },
     "Brote" :
     {
@@ -174,7 +174,7 @@
       "Ataque": "Al curarse cura 100 más" ,
       "Tipo": "Secreto",
       "Mana" : 20,
-      "Imagen": "S_Brote.png"
+      "Imagen": "Images/S_Brote.png"
     },
     "Comunion" :
     {
@@ -182,7 +182,7 @@
       "Ataque": "Si se han invocado los reyes hace 150 de daño" ,
       "Tipo": "Secreto",
       "Mana" : 50,
-      "Imagen": "S_Comunion.png"
+      "Imagen": "Images/S_Comunion.png"
     },
     "Hacerse" :
     {
@@ -190,7 +190,7 @@
       "Ataque": "Si la vida de 51 hace 300 de daño" ,
       "Tipo": "Secreto",
       "Mana" : 100,
-      "Imagen": "S_Hacerse.png"
+      "Imagen": "Images/S_Hacerse.png"
     },
     "Lluvia" :
     {
@@ -198,7 +198,7 @@
       "Ataque": "Al jugar un hechizo hace 100 de daño" ,
       "Tipo": "Secreto",
       "Mana" : 30,
-      "Imagen": "S_Lluvia.png"
+      "Imagen": "Images/S_Lluvia.png"
     },
     "Lunar" :
     {
@@ -206,7 +206,7 @@
       "Ataque": "Si salta un turno regenera 100 de mana" ,
       "Tipo": "Secreto",
       "Mana" : 25,
-      "Imagen": "S_Lunar.png"
+      "Imagen": "Images/S_Lunar.png"
     },
     "CMana" :
     {
@@ -214,28 +214,28 @@
       "Ataque": "Si la mana baja a 0 regenera 200" ,
       "Tipo": "Secreto",
       "Mana" : 50,
-      "Imagen": "S_Mana.png"
+      "Imagen": "Images/S_Mana.png"
     },
     "Parejo" : {
       "Nombre" : "Tajo parejo",
       "Ataque": "Si los 2 jugadores saltan reciben 100 de daño" ,
       "Tipo": "Secreto",
       "Mana" : 25,
-      "Imagen": "S_Parejo.png"
+      "Imagen": "Images/S_Parejo.png"
     },
     "Quemadura" : {
       "Nombre" : "Quemadura de maná",
       "Ataque": "Si la maná baja de 51 regenera 160" ,
       "Tipo": "Secreto",
       "Mana" : 35,
-      "Imagen": "S_Quemadura.png"
+      "Imagen": "Images/S_Quemadura.png"
     },
     "Solar" : {
       "Nombre" : "Eclipse Solar",
       "Ataque": "Si salta un turno cura 100 de vida" ,
       "Tipo": "Secreto",
       "Mana" : 25,
-      "Imagen": "S_Solar.png"
+      "Imagen": "Images/S_Solar.png"
     }
   }
 

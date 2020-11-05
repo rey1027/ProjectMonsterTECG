@@ -24,9 +24,9 @@ import java.io.FileReader;
 //Prueba de branch 2
 public class Main2 extends Application {
     /**
-     *
+     * Metodo para generar a las cartas del jugador 1 y 2
      * @param cantidad
-     *            Cantidad de Cartas que se quieren generar.
+     *            Cantidad de Cartas que se quieren generar .
      * @return un arreglo de String con las cartas aleatorias.
      */
     public static String[] generarCartasAleatorias1(int cantidad) {
@@ -42,20 +42,9 @@ public class Main2 extends Application {
         return cartaAleatoriaJ1  ;
     }
 
-    public static String[] generarCartasAleatorias2(int cantidad) {
-        String[] cartaAleatoriaJ2 = new String[cantidad];
-
-
-        String[] cartasJ2 = { "Congelar", "Curar", "Explosión", "Favor", "Forma", "Matriz", "PoderSupremo",
-                "Portal", "Purificar", "Roba","Gandling", "Gigante", "Gran", "Mal", "Micro", "Pescador", "Plastabot", "Reina",
-                "Rey", "Sacerdotisa", "Almacen","Brote","Comunion","Hacerse","Lluvia","Lunar","CMana","Parejo","Quemadura","Solar"  };
-
-        for (int i = 0; i < cantidad; i++) {
-            cartaAleatoriaJ2[i] = cartasJ2[(int) (Math.floor(Math.random() * ((cartasJ2.length - 1) - 0 + 1) + 0))];
-        }
-        return cartaAleatoriaJ2  ;
-    }
-
+    /**
+     * Variables de Prueba
+     */
     final String Gandling = "Gandling severo";
     final String Gigante = "Gigante Arcano";
     final String Gran = "Gigante maligno descomunal";
@@ -69,32 +58,31 @@ public class Main2 extends Application {
 
 
     /**
-     * La variable que controla si se ejecuta el Servidor o el Cliente.
-     * Se debe ejecutar primero como true y despues como false. De manera que el Servidor se crea primero.
-     * Si el cliente es creado antes del Servidor, la conexion falla.
+     * La variable que controla la ejecucion del Servidor o el Cliente.
+     *
      */
     private boolean Rol;
 
-        /***
-     * El cuadro de mensajeria del chat
+    /**
+     * Variables utilizadas en la interfaz
      */
     private TextArea Mensajes = new TextArea();
 
     private ImageView IVspecial = new ImageView();
 
-
-
     private Label labVida = new Label();
 
     private Label labMana = new Label();
 
-
+    /**
+     * Instancia a un nuevo juegador
+     */
     Jugador jugador = new Jugador();
-    Image imagePrueba = new Image(getClass().getResourceAsStream("Images/Vacio.png"));
+
 
 
     /**
-     * La conexion detecta cuando es un Servidor, si no, crea un cliente
+     * Objeto de la clase Network para la conexión entre el servidor y el cliente
      */
     private Network comunicacion;
 
@@ -508,7 +496,7 @@ public class Main2 extends Application {
 
             // PARSE JSON TO STRING
             String[] cartasGeneradasJ1 = generarCartasAleatorias1(16);
-            String[] cartasGeneradasJ2 = generarCartasAleatorias2(16);
+            String[] cartasGeneradasJ2 = generarCartasAleatorias1(16);
 
             for (int i = 0; i < cartasGeneradasJ1.length; i++) {
                 deckJ1.push(cartasGeneradasJ1[i]);
@@ -530,7 +518,7 @@ public class Main2 extends Application {
                 }
 
             }
-            //System.out.println(deckJ2);
+            System.out.println(deckJ2);
 
             String cartaJ1 = deckJ1.peek();
             deckJ1.pop();
