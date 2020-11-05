@@ -1,3 +1,4 @@
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -15,8 +16,56 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import java.io.BufferedReader;
+import java.io.FileReader;
+
+
 //Prueba de branch 2
 public class Main2 extends Application {
+    /**
+     *
+     * @param cantidad
+     *            Cantidad de Cartas que se quieren generar.
+     * @return un arreglo de String con las cartas aleatorias.
+     */
+    public static String[] generarCartasAleatorias1(int cantidad) {
+        String[] cartaAleatoriaJ1 = new String[cantidad];
+
+        String[] cartasJ1 = { "Gandling", "Gigante", "Gran", "Mal", "Micro", "Pescador", "Plastabot", "Reina",
+                "Rey", "Sacerdotisa", "Congelar", "Almacen","Brote","Comunion","Hacerse","Lluvia","Lunar","CMana","Parejo","Quemadura","Solar","Curar", "Explosión", "Favor", "Forma", "Matriz", "PoderSupremo",
+                "Portal", "Purificar", "Roba"};
+
+        for (int i = 0; i < cantidad; i++) {
+            cartaAleatoriaJ1[i] = cartasJ1[(int) (Math.floor(Math.random() * ((cartasJ1.length - 1) - 0 + 1) + 0))];
+        }
+        return cartaAleatoriaJ1  ;
+    }
+
+    public static String[] generarCartasAleatorias2(int cantidad) {
+        String[] cartaAleatoriaJ2 = new String[cantidad];
+
+
+        String[] cartasJ2 = { "Congelar", "Curar", "Explosión", "Favor", "Forma", "Matriz", "PoderSupremo",
+                "Portal", "Purificar", "Roba","Gandling", "Gigante", "Gran", "Mal", "Micro", "Pescador", "Plastabot", "Reina",
+                "Rey", "Sacerdotisa", "Almacen","Brote","Comunion","Hacerse","Lluvia","Lunar","CMana","Parejo","Quemadura","Solar"  };
+
+        for (int i = 0; i < cantidad; i++) {
+            cartaAleatoriaJ2[i] = cartasJ2[(int) (Math.floor(Math.random() * ((cartasJ2.length - 1) - 0 + 1) + 0))];
+        }
+        return cartaAleatoriaJ2  ;
+    }
+
+    final String Gandling = "Gandling severo";
+    final String Gigante = "Gigante Arcano";
+    final String Gran = "Gigante maligno descomunal";
+    final String Mal = "Mal Ganis";
+    final String Micro = "Micromomia";
+    final String Pescador = "Pescador Fantasmal";
+    final String Plastabot = "Plastabot";
+    final String Reina= "Reina de dolor";
+    final String Rey = "El Rey Exanime";
+    final String Sacerdotisa = "Sacerdotisa de furia";
 
 
     /**
@@ -33,16 +82,17 @@ public class Main2 extends Application {
 
     private ImageView IVspecial = new ImageView();
 
-    private TextField input= new TextField();
+
 
     private Label labVida = new Label();
 
     private Label labMana = new Label();
 
 
+    Jugador jugador = new Jugador();
     Image imagePrueba = new Image(getClass().getResourceAsStream("Images/Vacio.png"));
 
-    private VBox root = new VBox();
+
     /**
      * La conexion detecta cuando es un Servidor, si no, crea un cliente
      */
@@ -55,7 +105,7 @@ public class Main2 extends Application {
     private Scene ContenidoScene(){
         Stage primaryStage = new Stage();
         AnchorPane Contenedor = new AnchorPane();
-
+        TextField input= new TextField();
         input.setMinSize(285,10);
         Mensajes.setPrefHeight(25);
         Mensajes.setId("textarea-messages");
@@ -141,6 +191,7 @@ public class Main2 extends Application {
             String mensaje = Rol ? "Servidor: " : "Cliente: ";
             mensaje+=input.getText();
             input.clear();
+
             Mensajes.appendText(mensaje+"\n");
             /**
              * Se mantiene en constante comunicacion cada vez que se envia un mensaje, si falla, un mensaje de error sera enviado
@@ -328,15 +379,18 @@ public class Main2 extends Application {
     public void stop() throws Exception{
         comunicacion.Cerrar_C();
     }
+
+
+
     /**
      * El nuevo servidor
      * El contenido del mensaje se agrega en el espacio de mensajeria
      * @return utiliza este numero de puerto para realizar la comunicacion
      */
     private Servidor createServer(int p2){
-        Jugador jugador1 = new Jugador();
-        labVida.setText("VIDA: "+jugador1.getVida());
-        labMana.setText("MANA: "+jugador1.getMana());
+
+        labVida.setText("VIDA: "+jugador.getVida());
+        labMana.setText("MANA: "+jugador.getMana());
         return new Servidor(p2, data->{
             Platform.runLater(() ->{
                 //IVspecial.setImage(imagePrueba);
@@ -354,34 +408,73 @@ public class Main2 extends Application {
      * @return utiliza este numero de puerto y la direccion ip para realizar la comunicacion
      */
     private Cliente createClient(String ip,int puerto){
-        Jugador jugador2 = new Jugador();
-        labVida.setText("VIDA: "+jugador2.getVida());
-        labMana.setText("MANA: "+jugador2.getMana());
+        labVida.setText("VIDA: "+jugador.getVida());
+        labMana.setText("MANA: "+jugador.getMana());
         return new Cliente(ip, puerto, data->{
             Platform.runLater(() ->{
 
                 //IVspecial.setImage(imagePrueba);
 
+                switch(data.toString())
+                {
+                    //Monstruos
+                    case "Servidor: "+Gandling:
+                        Mensajes.appendText(data.toString()+" invocado"+"\n");
+                        jugador.recibirAtaque(140);
+                        break;
+                    case "Servidor: "+Gigante:
+                        Mensajes.appendText(data.toString()+" invocado"+"\n");
+                        jugador.recibirAtaque(200);
+                        break;
+                    case "Servidor: "+Gran:
+                        Mensajes.appendText(data.toString()+" invocado"+"\n");
+                        jugador.recibirAtaque(170);
+                        break;
+                    case "Servidor: "+Mal:
+                        Mensajes.appendText(data.toString()+" invocado"+"\n");
+                        jugador.recibirAtaque(510);
+                        break;
+                    case "Servidor: "+Micro:
+                        Mensajes.appendText(data.toString()+" invocado"+"\n");
+                        jugador.recibirAtaque(70);
+                        break;
+                    case "Servidor: "+Pescador:
+                        Mensajes.appendText(data.toString()+" invocado"+"\n");
+                        jugador.recibirAtaque(100);
+                        break;
+                    case "Servidor: "+Plastabot:
+                        Mensajes.appendText(data.toString()+" invocado"+"\n");
+                        jugador.recibirAtaque(50);
+                        System.out.println(jugador.getMana());
+                        break;
+                    case "Servidor: "+Reina:
+                        Mensajes.appendText(data.toString()+" invocado"+"\n");
+                        jugador.recibirAtaque(150);
+                        break;
+                    case "Servidor: "+Rey:
+                        Mensajes.appendText(data.toString()+" invocado"+"\n");
+                        jugador.recibirAtaque(300);
+                        break;
+                    case "Servidor: "+Sacerdotisa:
+                        Mensajes.appendText(data.toString()+" invocado"+"\n");
+                        jugador.recibirAtaque(110);
+                        break;
 
-                System.out.println(data.toString());
-                if (data.equals("Servidor: 1")){
+                    default:
+                        System.out.println("holi");
+                }
+                if (data.equals("Servidor: sss")){
                     System.out.println("YIIII");
-                    jugador2.recibirAtaque(200);
-                    jugador2.gastarMana(100);
-                    jugador2.regenMana();
+                    jugador.recibirAtaque(200);
+                    jugador.gastarMana(100);
+                    jugador.regenMana();
 
 
                 }
-                if ("Servidor: 1".equals(data.toString())){
-                    System.out.println("JAAAA");
-                    jugador2.recibirAtaque(200);
-                    jugador2.gastarMana(100);
 
+                labVida.setText("VIDA: "+jugador.getVida());
+                labMana.setText("MANA: "+jugador.getMana());
 
-                }
-                labVida.setText("VIDA: "+jugador2.getVida());
-                labMana.setText("MANA: "+jugador2.getMana());
-                Mensajes.appendText(data.toString()+"\n");
 
 
 
@@ -389,6 +482,79 @@ public class Main2 extends Application {
         });
     }
     public static void main(String[]args){
+
+        Stack deckJ1 = new Stack();
+        Stack deckJ2 = new Stack();
+
+        try{
+            String json;
+
+            BufferedReader br = new BufferedReader(new FileReader("cards.json"));
+            try{
+                StringBuilder sb = new StringBuilder();
+                String line = br.readLine();
+
+                while(line != null){
+                    sb.append(line);
+                    sb.append(System.lineSeparator());
+                    line = br.readLine();
+                }
+
+                json = sb.toString();
+            } finally {
+                br.close();
+            }
+
+
+            // PARSE JSON TO STRING
+            String[] cartasGeneradasJ1 = generarCartasAleatorias1(16);
+            String[] cartasGeneradasJ2 = generarCartasAleatorias2(16);
+
+            for (int i = 0; i < cartasGeneradasJ1.length; i++) {
+                deckJ1.push(cartasGeneradasJ1[i]);
+
+            }
+            System.out.println(deckJ1);
+
+            for (int i = 0; i < cartasGeneradasJ2.length; i++) {
+                deckJ2.push(cartasGeneradasJ2[i]);
+
+               try{
+                    JsonNode node = Json.parse(json);
+                    String j2 = cartasGeneradasJ2[i];
+                    String C2 = node.get("Cards").get(j2).get("Mana").asText();
+                    //System.out.println(C2);
+                }catch (Exception e){
+                    e.printStackTrace();
+                   System.out.println("No Funciona JSon");
+                }
+
+            }
+            //System.out.println(deckJ2);
+
+            String cartaJ1 = deckJ1.peek();
+            deckJ1.pop();
+            System.out.println("La primera carta es: " + cartaJ1);
+            System.out.println(deckJ1);
+            cartaJ1 = deckJ1.peek();
+            deckJ1.pop();
+            System.out.println("La primera carta es: " + cartaJ1);
+            System.out.println(deckJ1);
+            cartaJ1 = deckJ1.peek();
+            deckJ1.pop();
+            System.out.println("La primera carta es: " + cartaJ1);
+            System.out.println(deckJ1);
+            cartaJ1 = deckJ1.peek();
+            deckJ1.pop();
+            System.out.println("La primera carta es: " + cartaJ1);
+            System.out.println(deckJ1);
+
+
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
         launch(args);
 
     }

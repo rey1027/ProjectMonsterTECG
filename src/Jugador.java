@@ -13,11 +13,7 @@ public class Jugador {
     }
 
     public void regenMana(){
-        if(this.mana <= 150){
-            this.mana += 50;
-        } else {
-            this.mana += 200-this.mana;
-        }
+        this.mana+=(this.mana*0.25);
     }
 
     public void gastarMana(int costo) { this.mana -= costo; }

@@ -1,0 +1,242 @@
+{
+  "Cards" : {
+    "Gandling" :
+    {
+      "Nombre" : "Gandling severo",
+      "Ataque": 140 ,
+      "Tipo": "Esbirro",
+      "Mana" : 50,
+      "Imagen": "E_Gandling.png"
+    },
+    "Gigante" :
+    {
+      "Nombre" : "Gigante Arcano",
+      "Ataque": 200 ,
+      "Tipo": "Esbirro",
+      "Mana" : 200,
+      "Imagen": "E_Gigante.png"
+    },
+    "Gran" :
+    {
+      "Nombre" : "Gran Maligno Descomunal",
+      "Ataque": 170 ,
+      "Tipo": "Esbirro",
+      "Mana" : 100,
+      "Imagen": "E_Gran.png"
+    },
+    "Mal" :
+    {
+      "Nombre" : "Mal'Ganis",
+      "Ataque": 510 ,
+      "Tipo": "Esbirro",
+      "Mana" : 200,
+      "Imagen": "E_Mal.png"
+    },
+    "Micro" :
+    {
+      "Nombre" : "Micromomia",
+      "Ataque": 70 ,
+      "Tipo": "Esbirro",
+      "Mana" : 10,
+      "Imagen": "E_Micro.png"
+    },
+    "Pescador" :
+    {
+      "Nombre" : "Pescador Fantasma",
+      "Ataque": 100 ,
+      "Tipo": "Esbirro",
+      "Mana" : 100,
+      "Imagen": "E_Pescador.png"
+    },
+    "Plastabot" :
+    {
+      "Nombre" : "Plastabot",
+      "Ataque": 50 ,
+      "Tipo": "Esbirro",
+      "Mana" : 50,
+      "Imagen": "E_Plastabot.png"
+    },
+    "Reina" :
+    {
+      "Nombre" : "Reina de dolor",
+      "Ataque": 150,
+      "Tipo": "Esbirro",
+      "Mana" : 70,
+      "Imagen": "E_Reina.png"
+    },
+    "Rey" :
+    {
+      "Nombre" : "El Rey Exámine",
+      "Ataque": 300 ,
+      "Tipo": "Esbirro",
+      "Mana" : 150,
+      "Imagen": "E_Rey.png"
+    },
+    "Sacerdotisa" :
+    {
+      "Nombre" : "Sacerdotisa de Furia",
+      "Ataque": 100 ,
+      "Tipo": "Esbirro",
+      "Mana" : 30,
+      "Imagen": "E_Sacerdotisa.png"
+    },
+    "Congelar" :
+    {
+      "Nombre" : "Rayo de Escarcha",
+      "Ataque": "Congela al rival un turno" ,
+      "Tipo": "Hechizo",
+      "Mana" : 60,
+      "Imagen": "H_Congelar.png"
+    },
+    "Curar" :
+    {
+      "Nombre" : "Toque de Sanación",
+      "Ataque": 200 ,
+      "Tipo": "Hechizo",
+      "Mana" : 60,
+      "Imagen": "H_Curar.png"
+    },
+    "Explosión" :
+    {
+      "Nombre" : "Explosión Arena",
+      "Ataque": "Duplica el siguente ataque" ,
+      "Tipo": "Hechizo",
+      "Mana" : 100,
+      "Imagen": "H_Esplosión.png"
+    },
+    "Favor" :
+    {
+      "Nombre" : "Favor Divino",
+      "Ataque": "Añade una carta a tu mano y 100 más para tu siguente ataque" ,
+      "Tipo": "Hechizo",
+      "Mana" : 25,
+      "Imagen": "H_Favor.png"
+    },
+    "Forma" :
+    {
+      "Nombre" : "Forma Prohibida",
+      "Ataque": "Carta Aleatoria" ,
+      "Tipo": "Hechizo",
+      "Mana" : 70,
+      "Imagen": "H_Forma.png"
+    },
+    "Matriz" :
+    {
+      "Nombre" : "Matriz de autodefensa",
+      "Ataque": "Te protege un turno" ,
+      "Tipo": "Hechizo",
+      "Mana" : 80,
+      "Imagen": "H_Matriz.png"
+    },
+    "PoderSupremo" :
+    {
+      "Nombre" : "Cubo rompecabezas de Yogg-Saron",
+      "Ataque": "Poder supremo 3 cartas sin importar maná" ,
+      "Tipo": "Hechizo",
+      "Mana" : 200,
+      "Imagen": "H_PoderSupremo.png"
+    },
+    "Portal" :
+    {
+      "Nombre" : "Portal de Claro de la Luna",
+      "Ataque": 100 ,
+      "Tipo": "Hechizo",
+      "Mana" : 50,
+      "Imagen": "H_Portal.png"
+    },
+    "Purificar" :
+    {
+      "Nombre" : "Purificar",
+      "Ataque": 50 ,
+      "Tipo": "Hechizo",
+      "Mana" : 0,
+      "Imagen": "H_Purificar.png"
+    },
+    "Roba" :
+    {
+      "Nombre" : "Robo de ideas",
+      "Ataque": "Roba una carta aleatoria" ,
+      "Tipo": "Hechizo",
+      "Mana" : 60,
+      "Imagen": "H_Roba.png"
+    },
+    "Almacen" :
+    {
+      "Nombre" : "El Alma-cén",
+      "Ataque": "Al jugar 10 hechizos ganas la partida" ,
+      "Tipo": "Secreto",
+      "Mana" : 50,
+      "Imagen": "S_Almacen.png"
+    },
+    "Brote" :
+    {
+      "Nombre" : "Brote de jade",
+      "Ataque": "Al curarse cura 100 más" ,
+      "Tipo": "Secreto",
+      "Mana" : 20,
+      "Imagen": "S_Brote.png"
+    },
+    "Comunion" :
+    {
+      "Nombre" : "Comunión astral",
+      "Ataque": "Si se han invocado los reyes hace 150 de daño" ,
+      "Tipo": "Secreto",
+      "Mana" : 50,
+      "Imagen": "S_Comunion.png"
+    },
+    "Hacerse" :
+    {
+      "Nombre" : "Hacerse el muerto",
+      "Ataque": "Si la vida de 51 hace 300 de daño" ,
+      "Tipo": "Secreto",
+      "Mana" : 100,
+      "Imagen": "S_Hacerse.png"
+    },
+    "Lluvia" :
+    {
+      "Nombre" : "Lluvia de estrellas",
+      "Ataque": "Al jugar un hechizo hace 100 de daño" ,
+      "Tipo": "Secreto",
+      "Mana" : 30,
+      "Imagen": "S_Lluvia.png"
+    },
+    "Lunar" :
+    {
+      "Nombre" : "Eclipse lunar",
+      "Ataque": "Si salta un turno regenera 100 de mana" ,
+      "Tipo": "Secreto",
+      "Mana" : 25,
+      "Imagen": "S_Lunar.png"
+    },
+    "CMana" :
+    {
+      "Nombre" : "Maná viviente",
+      "Ataque": "Si la mana baja a 0 regenera 200" ,
+      "Tipo": "Secreto",
+      "Mana" : 50,
+      "Imagen": "S_Mana.png"
+    },
+    "Parejo" : {
+      "Nombre" : "Tajo parejo",
+      "Ataque": "Si los 2 jugadores saltan reciben 100 de daño" ,
+      "Tipo": "Secreto",
+      "Mana" : 25,
+      "Imagen": "S_Parejo.png"
+    },
+    "Quemadura" : {
+      "Nombre" : "Quemadura de maná",
+      "Ataque": "Si la maná baja de 51 regenera 160" ,
+      "Tipo": "Secreto",
+      "Mana" : 35,
+      "Imagen": "S_Quemadura.png"
+    },
+    "Solar" : {
+      "Nombre" : "Eclipse Solar",
+      "Ataque": "Si salta un turno cura 100 de vida" ,
+      "Tipo": "Secreto",
+      "Mana" : 25,
+      "Imagen": "S_Solar.png"
+    }
+  }
+
+}
