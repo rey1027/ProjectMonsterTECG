@@ -21,7 +21,11 @@ import java.io.FileReader;
 import java.util.concurrent.atomic.AtomicInteger;
 
 
-//Prueba de branch 2
+/**
+ * Clase ejecutable del videojuego
+ * @author RACHEL_BRYAN
+ * @version 1.0
+ */
 public class Main2 extends Application {
     private static String C5 = "w";
 
@@ -62,7 +66,6 @@ public class Main2 extends Application {
 
     /**
      * La variable que controla la ejecucion del Servidor o el Cliente.
-     *
      */
     private boolean Rol;
 
@@ -83,7 +86,6 @@ public class Main2 extends Application {
     Jugador jugador = new Jugador();
 
 
-
     /**
      * Objeto de la clase Network para la conexión entre el servidor y el cliente
      */
@@ -93,14 +95,15 @@ public class Main2 extends Application {
      * Parte de la interfaz y activadores del envio de mensajes
      * @return La ventana del chat(root)
      */
-
     private Scene ContenidoScene() throws Exception{
+
+        //Prueba del Json
         while (true){
             Stack deckJ1 = new Stack();
             ListaCircular listaCircular = new ListaCircular();
             //Stack deckJ2 = new Stack();
             try {
-                String json;
+                String jsonp;
 
                 BufferedReader br = new BufferedReader(new FileReader("cards.json"));
                 try {
@@ -113,26 +116,27 @@ public class Main2 extends Application {
                         line = br.readLine();
                     }
 
-                    json = sb.toString();
+                    jsonp = sb.toString();
                 } finally {
                     br.close();
                 }
 
 
-                // PARSE JSON TO STRING
+
                 String[] cartasGeneradasJ1 = generarCartasAleatorias1(16);
+
+                // Ingresa las cartas generadas a la pila
 
                 for (int i = 0; i < cartasGeneradasJ1.length; i++) {
                     deckJ1.push(cartasGeneradasJ1[i]);
-
                 }
+                //Imprime la pila creada
                 System.out.println(deckJ1);
 
-                JsonNode node = Json.parse(json);
-                //String j2 = cartasGeneradasJ2[i];
-                //String C2 = node.get("Cards").get(j2).get("Mana").asText();
-                //System.out.println(C2);
+                // PARSE JSON TO STRING
+                JsonNode node = Json.parse(jsonp);
 
+                //Ingreso de las cartas a la mano
                 String cartaJ1 = deckJ1.peek();
                 listaCircular.agregarAlFinal(cartaJ1);
                 deckJ1.pop();
@@ -158,6 +162,8 @@ public class Main2 extends Application {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
+            //Variables de para la interfaz
 
             Stage primaryStage = new Stage();
             AnchorPane Contenedor = new AnchorPane();
@@ -291,17 +297,15 @@ public class Main2 extends Application {
                 input.clear();
 
                 Mensajes.appendText(mensaje+"\n");
-                /**
-                 * Se mantiene en constante comunicacion cada vez que se envia un mensaje, si falla, un mensaje de error sera enviado
-                 */
                 try {
-                    comunicacion.send(mensaje);                  //   ===== Excepcion 1 : Si el mensaje no encuentra destinatario el envío falla =====
+                    comunicacion.send(mensaje);
 
                 } catch (Exception e) {
                     Mensajes.appendText("Fallo del envio"+"\n");
                 }
 
             });
+
             invocar.setOnAction(event ->{
                 try {
                     String invocada= listaCircular.getValor(indiceMano.get());
@@ -313,7 +317,7 @@ public class Main2 extends Application {
                     mensaje+=C7;
                     Mensajes.appendText(mensaje+" ha sido invocado(a)"+"\n");
                     try {
-                        comunicacion.send(mensaje);                  //   ===== Excepcion 1 : Si el mensaje no encuentra destinatario el envío falla =====
+                        comunicacion.send(mensaje);
 
                     } catch (Exception e) {
                         Mensajes.appendText("Fallo del envio"+"\n");
@@ -326,6 +330,7 @@ public class Main2 extends Application {
                 }
 
             });
+
             butright.setOnAction(event ->{
                 int max = listaCircular.getTamanio();
                 indiceMano.getAndIncrement();
@@ -380,14 +385,14 @@ public class Main2 extends Application {
         }
     }
 
-    /**
-     * Iniciador de la concexion
-     */
+
 
     @Override
     /**
-     * Las ventanas principales(Stages), las cuales se crean al ejecutar el programa.
+     * Metodo de inicio
+     * Donde se crea el Stages al ejecutar el programa.
      * Al crear el Servidor, una ventana previa pide al usuario ingresar el numero de puerto de la conexion
+     * Al crear el Cliente , contiene una ventana previa para ingresar el puerto y la ip
      */
     public void start(Stage Menu) throws Exception {
         Menu.setTitle("Menu");
@@ -403,6 +408,11 @@ public class Main2 extends Application {
         AnchorPane.setTopAnchor(MenuVBox,100d);
         AnchorPane.setLeftAnchor(MenuVBox,100d);
         EventHandler<ActionEvent> evento = new EventHandler<ActionEvent>() {
+
+            /**
+             * Metodo para pedirle al servidor un puerto para iniciar la partida y presenta la ventana del puerto
+             * @param actionEvent es utilizado para inicializar el evento cuando se crea el Anfitrión
+             */
             @Override
             public void handle(ActionEvent actionEvent) {
                 Rol = true;
@@ -418,14 +428,15 @@ public class Main2 extends Application {
                 root2.getChildren().addAll(label1,introPort,continuar);
                 EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
                     /**
-                     *Evento que toma el puerto escrito en la ventana activada por el Servidor
+                     * Evento donde se verifica que el puerto funcione
+                     * @param e utilizada para ejecutar el evento
                      */
                     public void handle(ActionEvent e)
                     {
-                        try {                          //   ===== Excepcion 5 : Si al iniciar el server se ingresa un valor con carácteres no numéricos como puerto =====
+                        try {
                             String text=introPort.getText();
                             int number = Integer.parseInt(text);
-                            try {                                   //   ===== Excepcion 3 : Si al escribir el puerto se recibe un valor mayor al máximo de puertos de red(65536) =====
+                            try {
                                 String p=introPort.getText();
                                 int p2 = Integer.parseInt(p);
                                 if (p2>65536){
@@ -471,6 +482,10 @@ public class Main2 extends Application {
         ButAnfitrion.setOnAction(evento);
 
         EventHandler<ActionEvent> evento2 = new EventHandler<ActionEvent>() {
+            /**
+             * Metódo para efectuar el evento del Cliente y crear la ventana con el puerto y la direccion ip
+             * @param actionEvent Utilizada para ejecutar el evento correspondiente
+             */
             @Override
             public void handle(ActionEvent actionEvent) {
                 Rol = false;
@@ -487,13 +502,15 @@ public class Main2 extends Application {
                 TextField introPort = new TextField();
                 root2.getChildren().addAll(label1,introIP,label2,introPort,continuar);
                 EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
+
                     /**
-                     *Evento que toma el puerto escrito en la ventana activada por el Servidor
+                     * Metódo donde se verifica la ip y el puerto
+                     * @param e Utilizada para efectuar el evento
                      */
                     public void handle(ActionEvent e)
                     {
 
-                        try {                               //   ===== Excepcion 4 : Si el cliente ingresa una ip en la que alguno de los numeros sea mayor a 255 o menor a 1 =====
+                        try {
                             String ip=introIP.getText();
                             int puerto = Integer.parseInt(introPort.getText());
                             String[] parts = ip.split("[.]");
@@ -557,9 +574,9 @@ public class Main2 extends Application {
 
 
     /**
-     * El nuevo servidor
+     * Metodo para crear el servidor y se especifican los diferentes eventos de ataques que se obtienen de la carta
      * El contenido del mensaje se agrega en el espacio de mensajeria
-     * @return utiliza este numero de puerto para realizar la comunicacion
+     * @return utiliza este numero de puerto para realizar la comunicacion y los eventos ataques
      */
     private Servidor createServer(int p2){
 
@@ -626,9 +643,9 @@ public class Main2 extends Application {
     }
 
     /**
-     * El nuevo cliente
-     * El contenido del mensaje se agrega en el espacio de mensajeria
-     * @return utiliza este numero de puerto y la direccion ip para realizar la comunicacion
+     * Metodo para crear el cliente y se especifican los diferentes eventos de ataques que se obtienen de la carta
+     * El contenido del evento se agrega en el espacio de texto
+     * @return utiliza este numero de puerto y la direccion ip para realizar la comunicacion y los eventos ataques
      */
     private Cliente createClient(String ip,int puerto){
         labVida.setText("VIDA: "+jugador.getVida());
@@ -704,15 +721,12 @@ public class Main2 extends Application {
             });
         });
     }
+
+    /**
+     * Inicializa la ventana principal
+     * @param args utilizada para inicializar la interfaz
+     */
     public static void main(String[]args){
-
-
-
-
-
-
-
-
         launch(args);
 
     }

@@ -66,11 +66,11 @@ public abstract class Network {
          */
         @Override
         public void run() {
-            /**
-             * Tratar de conectarse con el Server. Se inicia un nuevo servidor con el puerto
-             * En el cliente se crea un nuevo socket con la direccion Ip y el puerto, tratando de realizar la conexion
-             */
-            try(ServerSocket server = Rol() ? new ServerSocket(ObtenerPuerto()) : null;           //   ===== Excepcion 2 : Si la conexion con el server falla(si se ejecuta primero el cliente) =====
+
+             //Se crea el socket e inicia un nuevo servidor con el puerto indicado
+            //En el cliente se crea un nuevo socket con la direccion Ip y el puerto, tratando de realizar la conexion
+
+            try(ServerSocket server = Rol() ? new ServerSocket(ObtenerPuerto()) : null;
                 Socket socket = Rol() ? server.accept() : new Socket(ObtenerIp(), ObtenerPuerto());
                 ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
                 ObjectInputStream in = new ObjectInputStream(socket.getInputStream())) {
@@ -78,9 +78,8 @@ public abstract class Network {
                 this.socket = socket;
                 this.out = out;
                 socket.setTcpNoDelay(true);
-                /**
-                 * Permite llamar a la funcion y transmitir los datos
-                 */
+
+                //Permite llamar a la funcion y transmitir los datos
                 while(true){
                     Serializable data = (Serializable) in.readObject();
                     onRecieveCallBack.accept(data);

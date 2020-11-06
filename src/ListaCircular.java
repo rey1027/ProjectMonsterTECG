@@ -1,3 +1,6 @@
+/**
+ * Clase encargada de las operaciones de Lista Circular
+ */
 public class ListaCircular {
     // Puntero que indica el inicio de la lista o conocida tambien
     // como cabeza de la lista.
