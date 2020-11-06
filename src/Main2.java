@@ -23,6 +23,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 //Prueba de branch 2
 public class Main2 extends Application {
+    private static String C5 = "w";
+
     /**
      * Metodo para generar a las cartas del jugador 1 y 2
      * @param cantidad
@@ -48,14 +50,14 @@ public class Main2 extends Application {
      */
     final String Gandling = "Gandling severo";
     final String Gigante = "Gigante Arcano";
-    final String Gran = "Gigante maligno descomunal";
-    final String Mal = "Mal Ganis";
+    final String Gran = "Gran Maligno Descomunal";
+    final String Mal = "Mal'Ganis";
     final String Micro = "Micromomia";
-    final String Pescador = "Pescador Fantasmal";
+    final String Pescador = "Pescador Fantasma";
     final String Plastabot = "Plastabot";
     final String Reina= "Reina de dolor";
-    final String Rey = "El Rey Exanime";
-    final String Sacerdotisa = "Sacerdotisa de furia";
+    final String Rey = "El Rey Exámine";
+    final String Sacerdotisa = "Sacerdotisa de Furia";
 
 
     /**
@@ -304,55 +306,70 @@ public class Main2 extends Application {
                 try {
                     String invocada= listaCircular.getValor(indiceMano.get());
                     String C5 = node.get("Cards").get(invocada).get("Imagen").asText();
+                    String C6 = node.get("Cards").get(invocada).get("Tipo").asText();
+                    String C7 = node.get("Cards").get(invocada).get("Nombre").asText();
+
+                    String mensaje = Rol ? "Servidor: " : "Cliente: ";
+                    mensaje+=C7;
+                    Mensajes.appendText(mensaje+" ha sido invocado(a)"+"\n");
+                    try {
+                        comunicacion.send(mensaje);                  //   ===== Excepcion 1 : Si el mensaje no encuentra destinatario el envío falla =====
+
+                    } catch (Exception e) {
+                        Mensajes.appendText("Fallo del envio"+"\n");
+                    }
+
                     Image imageMano5 = new Image(getClass().getResourceAsStream(C5));
                     IVspecial.setImage(imageMano5);
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
 
-
-
             });
             butright.setOnAction(event ->{
+                int max = listaCircular.getTamanio();
                 indiceMano.getAndIncrement();
+                if (indiceMano.get()==max){
+                    indiceMano.set(0);
+                }
                 System.out.println(indiceMano);
-                if (indiceMano.get()==0){
-                    IVmano.setImage(imageMano1);
+                String e = null;
+                try {
+                    e = listaCircular.getValor(indiceMano.get());
+                } catch (Exception exception) {
+                    exception.printStackTrace();
                 }
-                if (indiceMano.get()==1){
-                    IVmano.setImage(imageMano2);
-                }
-                if (indiceMano.get()==2){
-                    IVmano.setImage(imageMano3);
-                }
-                if (indiceMano.get()==3){
-                    IVmano.setImage(imageMano4);
-                }
-                if (indiceMano.get()==4){
-                    indiceMano.set(3);
-                }
+                C5 = node.get("Cards").get(e).get("Imagen").asText();
+                Image ne = new Image(C5);
+                IVmano.setImage(ne);
+
 
             });
             butleft.setOnAction(event ->{
+
+                int max = listaCircular.getTamanio();
                 indiceMano.getAndDecrement();
+                if (indiceMano.get()<0){
+                    indiceMano.set(max-1);
+                }
                 System.out.println(indiceMano);
-                if (indiceMano.get()==0){
-                    IVmano.setImage(imageMano1);
+                String e = null;
+                try {
+                    e = listaCircular.getValor(indiceMano.get());
+                } catch (Exception exception) {
+                    exception.printStackTrace();
                 }
-                if (indiceMano.get()==1){
-                    IVmano.setImage(imageMano2);
-                }
-                if (indiceMano.get()==2){
-                    IVmano.setImage(imageMano3);
-                }
-                if (indiceMano.get()==3){
-                    IVmano.setImage(imageMano4);
-                }
-                if (indiceMano.get()==-1){
-                    indiceMano.set(0);
-                }
+                C5 = node.get("Cards").get(e).get("Imagen").asText();
+                Image ne = new Image(C5);
+                IVmano.setImage(ne);
 
 
+            });
+
+            pila.setOnAction(event ->{
+                String cartaJ1 = deckJ1.peek();
+                listaCircular.agregarAlFinal(cartaJ1);
+                deckJ1.pop();
             });
 
             Scene scene = new Scene(Contenedor,550,500);
@@ -550,6 +567,55 @@ public class Main2 extends Application {
         labMana.setText("MANA: "+jugador.getMana());
         return new Servidor(p2, data->{
             Platform.runLater(() ->{
+
+                switch(data.toString())
+                {
+                    //Monstruos
+                    case "Cliente: "+Gandling:
+                        Mensajes.appendText(data.toString()+" invocado"+"\n");
+                        jugador.recibirAtaque(140);
+                        break;
+                    case "Cliente: "+Gigante:
+                        Mensajes.appendText(data.toString()+" invocado"+"\n");
+                        jugador.recibirAtaque(200);
+                        break;
+                    case "Cliente: "+Gran:
+                        Mensajes.appendText(data.toString()+" invocado"+"\n");
+                        jugador.recibirAtaque(170);
+                        break;
+                    case "Cliente: "+Mal:
+                        Mensajes.appendText(data.toString()+" invocado"+"\n");
+                        jugador.recibirAtaque(510);
+                        break;
+                    case "Cliente: "+Micro:
+                        Mensajes.appendText(data.toString()+" invocado"+"\n");
+                        jugador.recibirAtaque(70);
+                        break;
+                    case "Cliente: "+Pescador:
+                        Mensajes.appendText(data.toString()+" invocado"+"\n");
+                        jugador.recibirAtaque(100);
+                        break;
+                    case "Cliente: "+Plastabot:
+                        Mensajes.appendText(data.toString()+" invocado"+"\n");
+                        jugador.recibirAtaque(50);
+                        System.out.println(jugador.getMana());
+                        break;
+                    case "Cliente: "+Reina:
+                        Mensajes.appendText(data.toString()+" invocado"+"\n");
+                        jugador.recibirAtaque(150);
+                        break;
+                    case "Cliente: "+Rey:
+                        Mensajes.appendText(data.toString()+" invocado"+"\n");
+                        jugador.recibirAtaque(300);
+                        break;
+                    case "Cliente: "+Sacerdotisa:
+                        Mensajes.appendText(data.toString()+" invocado"+"\n");
+                        jugador.recibirAtaque(110);
+                        break;
+
+                    default:
+                        System.out.println("holi");
+                }
                 //IVspecial.setImage(imagePrueba);
                 Mensajes.appendText(data.toString()+"\n");
 
