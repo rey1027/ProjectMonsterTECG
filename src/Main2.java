@@ -3,7 +3,6 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -19,7 +18,7 @@ import javafx.scene.Scene;
 import com.fasterxml.jackson.databind.JsonNode;
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.sql.ClientInfoStatus;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 //Prueba de branch 2
@@ -94,10 +93,93 @@ public class Main2 extends Application {
      */
 
     private Scene ContenidoScene() throws Exception{
-        Stack deckJ1 = new Stack();
-        ListaCircular listaCircular = new ListaCircular();
-        //Stack deckJ2 = new Stack();
-        try {
+        while (true){
+            Stack deckJ1 = new Stack();
+            ListaCircular listaCircular = new ListaCircular();
+            //Stack deckJ2 = new Stack();
+            try {
+                String json;
+
+                BufferedReader br = new BufferedReader(new FileReader("cards.json"));
+                try {
+                    StringBuilder sb = new StringBuilder();
+                    String line = br.readLine();
+
+                    while (line != null) {
+                        sb.append(line);
+                        sb.append(System.lineSeparator());
+                        line = br.readLine();
+                    }
+
+                    json = sb.toString();
+                } finally {
+                    br.close();
+                }
+
+
+                // PARSE JSON TO STRING
+                String[] cartasGeneradasJ1 = generarCartasAleatorias1(16);
+
+                for (int i = 0; i < cartasGeneradasJ1.length; i++) {
+                    deckJ1.push(cartasGeneradasJ1[i]);
+
+                }
+                System.out.println(deckJ1);
+
+                JsonNode node = Json.parse(json);
+                //String j2 = cartasGeneradasJ2[i];
+                //String C2 = node.get("Cards").get(j2).get("Mana").asText();
+                //System.out.println(C2);
+
+                String cartaJ1 = deckJ1.peek();
+                listaCircular.agregarAlFinal(cartaJ1);
+                deckJ1.pop();
+                System.out.println("La primera carta es: " + cartaJ1);
+                System.out.println(deckJ1);
+                cartaJ1 = deckJ1.peek();
+                listaCircular.agregarAlFinal(cartaJ1);
+                deckJ1.pop();
+                System.out.println("La primera carta es: " + cartaJ1);
+                System.out.println(deckJ1);
+                cartaJ1 = deckJ1.peek();
+                listaCircular.agregarAlFinal(cartaJ1);
+                deckJ1.pop();
+                System.out.println("La primera carta es: " + cartaJ1);
+                System.out.println(deckJ1);
+                cartaJ1 = deckJ1.peek();
+                listaCircular.agregarAlFinal(cartaJ1);
+                deckJ1.pop();
+                System.out.println("La primera carta es: " + cartaJ1);
+                System.out.println(deckJ1);
+                listaCircular.listar();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            Stage primaryStage = new Stage();
+            AnchorPane Contenedor = new AnchorPane();
+            TextField input= new TextField();
+            input.setMinSize(285,10);
+            Mensajes.setPrefHeight(25);
+            Mensajes.setId("textarea-messages");
+            String a;
+            String b;
+            String c;
+            String d;
+            String C2;
+            String C3;
+            String C4;
+            String C1;
+            AtomicInteger indiceMano = new AtomicInteger();
+            a = listaCircular.getValor(indiceMano.get());
+            indiceMano.getAndIncrement();
+            b = listaCircular.getValor(indiceMano.get());
+            indiceMano.getAndIncrement();
+            c = listaCircular.getValor(indiceMano.get());
+            indiceMano.getAndIncrement();
+            d = listaCircular.getValor(indiceMano.get());
+            System.out.println(a);
             String json;
 
             BufferedReader br = new BufferedReader(new FileReader("cards.json"));
@@ -115,178 +197,170 @@ public class Main2 extends Application {
             } finally {
                 br.close();
             }
-
-
-            // PARSE JSON TO STRING
-            String[] cartasGeneradasJ1 = generarCartasAleatorias1(16);
-
-            for (int i = 0; i < cartasGeneradasJ1.length; i++) {
-                deckJ1.push(cartasGeneradasJ1[i]);
-
-            }
-            System.out.println(deckJ1);
-
             JsonNode node = Json.parse(json);
-            //String j2 = cartasGeneradasJ2[i];
-            //String C2 = node.get("Cards").get(j2).get("Mana").asText();
-            //System.out.println(C2);
+            C2 = node.get("Cards").get(b).get("Imagen").asText();
+            C1 = node.get("Cards").get(a).get("Imagen").asText();
+            C3 = node.get("Cards").get(c).get("Imagen").asText();
+            C4 = node.get("Cards").get(d).get("Imagen").asText();
+            Image image1 = new Image(getClass().getResourceAsStream("Images/S_Brote.png"));
 
-            String cartaJ1 = deckJ1.peek();
-            listaCircular.agregarAlFinal(cartaJ1);
-            deckJ1.pop();
-            System.out.println("La primera carta es: " + cartaJ1);
-            System.out.println(deckJ1);
-            cartaJ1 = deckJ1.peek();
-            listaCircular.agregarAlFinal(cartaJ1);
-            deckJ1.pop();
-            System.out.println("La primera carta es: " + cartaJ1);
-            System.out.println(deckJ1);
-            cartaJ1 = deckJ1.peek();
-            listaCircular.agregarAlFinal(cartaJ1);
-            deckJ1.pop();
-            System.out.println("La primera carta es: " + cartaJ1);
-            System.out.println(deckJ1);
-            cartaJ1 = deckJ1.peek();
-            listaCircular.agregarAlFinal(cartaJ1);
-            deckJ1.pop();
-            System.out.println("La primera carta es: " + cartaJ1);
-            System.out.println(deckJ1);
-            listaCircular.listar();
+            Image imageMano2 = new Image(getClass().getResourceAsStream(C2));
+            Image imageMano1 = new Image(getClass().getResourceAsStream(C1));
+            Image imageMano3 = new Image(getClass().getResourceAsStream(C3));
+            Image imageMano4 = new Image(getClass().getResourceAsStream(C4));
+            Image imagePila = new Image(getClass().getResourceAsStream("Images/PilaDeCartas.png"));
+            Image imageButleft = new Image(getClass().getResourceAsStream("Images/BotonA.png"));
+            Image imageButright = new Image(getClass().getResourceAsStream("Images/BotonS.png"));
 
-        } catch (Exception e) {
-            e.printStackTrace();
+            IVspecial.setFitHeight(285);
+            IVspecial.setFitWidth(650);
+            IVspecial.setX(-125);
+            IVspecial.setY(5);
+
+            ImageView pilaCartas = new ImageView(imagePila);
+            pilaCartas.setFitWidth(130);
+            pilaCartas.setFitHeight(120);
+
+            ImageView IVmano = new ImageView(imageMano1);
+            IVmano.setFitHeight(185);
+            IVmano.setFitWidth(430);
+            IVmano.setX(-19);
+            IVmano.setY(300);
+
+            ImageView IVanterior = new ImageView(imageButleft);
+            IVanterior.setFitHeight(30);
+            IVanterior.setFitWidth(60);
+
+            ImageView IVsiguiente = new ImageView(imageButright);
+            IVsiguiente.setFitHeight(30);
+            IVsiguiente.setFitWidth(60);
+
+
+            Button butleft = new Button();
+            butleft.setGraphic(IVanterior);
+
+            Button butright = new Button();
+            butright.setGraphic(IVsiguiente);
+
+            Button invocar = new Button("Invocar");
+            invocar.setMinSize(85,37);
+
+            Button pila = new Button("Tomar carta");
+            pila.setMinSize(24,37);
+
+            Button historial = new Button("Historial");
+            historial.setMinSize(80,37);
+
+            Button salto = new Button("Saltar Turno");
+            //salto.setGraphic(imageView);
+            salto.setMinSize(24,37);
+
+            HBox hBoxJugar1 = new HBox(128,butleft,butright);
+
+            HBox hBoxJugar2 = new HBox(128,invocar,salto);
+
+            VBox vBoxInfo = new VBox(30,historial,labVida,labMana);
+
+            VBox vBoxPila = new VBox(15,pila,pilaCartas);
+
+            Contenedor.getChildren().addAll(hBoxJugar1,hBoxJugar2,vBoxInfo,vBoxPila,input,IVspecial,IVmano,Mensajes);
+
+            AnchorPane.setLeftAnchor(Mensajes,42d);
+            AnchorPane.setTopAnchor(Mensajes,40d);
+
+            AnchorPane.setLeftAnchor(hBoxJugar1,53d);
+            AnchorPane.setBottomAnchor(hBoxJugar1,110d);
+
+            AnchorPane.setLeftAnchor(hBoxJugar2,42d);
+            AnchorPane.setBottomAnchor(hBoxJugar2,40d);
+
+            AnchorPane.setRightAnchor(vBoxPila,15d);
+            AnchorPane.setBottomAnchor(vBoxPila,15d);
+
+            AnchorPane.setLeftAnchor(input,48d);
+            AnchorPane.setBottomAnchor(input,205d);
+
+            AnchorPane.setTopAnchor(vBoxInfo,50d);
+            AnchorPane.setRightAnchor(vBoxInfo,70d);
+
+            input.setOnAction(event ->{
+                String mensaje = Rol ? "Servidor: " : "Cliente: ";
+                mensaje+=input.getText();
+                input.clear();
+
+                Mensajes.appendText(mensaje+"\n");
+                /**
+                 * Se mantiene en constante comunicacion cada vez que se envia un mensaje, si falla, un mensaje de error sera enviado
+                 */
+                try {
+                    comunicacion.send(mensaje);                  //   ===== Excepcion 1 : Si el mensaje no encuentra destinatario el envío falla =====
+
+                } catch (Exception e) {
+                    Mensajes.appendText("Fallo del envio"+"\n");
+                }
+
+            });
+            invocar.setOnAction(event ->{
+                try {
+                    String invocada= listaCircular.getValor(indiceMano.get());
+                    String C5 = node.get("Cards").get(invocada).get("Imagen").asText();
+                    Image imageMano5 = new Image(getClass().getResourceAsStream(C5));
+                    IVspecial.setImage(imageMano5);
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+
+
+
+            });
+            butright.setOnAction(event ->{
+                indiceMano.getAndIncrement();
+                System.out.println(indiceMano);
+                if (indiceMano.get()==0){
+                    IVmano.setImage(imageMano1);
+                }
+                if (indiceMano.get()==1){
+                    IVmano.setImage(imageMano2);
+                }
+                if (indiceMano.get()==2){
+                    IVmano.setImage(imageMano3);
+                }
+                if (indiceMano.get()==3){
+                    IVmano.setImage(imageMano4);
+                }
+                if (indiceMano.get()==4){
+                    indiceMano.set(3);
+                }
+
+            });
+            butleft.setOnAction(event ->{
+                indiceMano.getAndDecrement();
+                System.out.println(indiceMano);
+                if (indiceMano.get()==0){
+                    IVmano.setImage(imageMano1);
+                }
+                if (indiceMano.get()==1){
+                    IVmano.setImage(imageMano2);
+                }
+                if (indiceMano.get()==2){
+                    IVmano.setImage(imageMano3);
+                }
+                if (indiceMano.get()==3){
+                    IVmano.setImage(imageMano4);
+                }
+                if (indiceMano.get()==-1){
+                    indiceMano.set(0);
+                }
+
+
+            });
+
+            Scene scene = new Scene(Contenedor,550,500);
+            primaryStage.setScene(scene);
+
+
+            return scene;
         }
-
-        Stage primaryStage = new Stage();
-        AnchorPane Contenedor = new AnchorPane();
-        TextField input= new TextField();
-        input.setMinSize(285,10);
-        Mensajes.setPrefHeight(25);
-        Mensajes.setId("textarea-messages");
-        String a;
-        String C2;
-
-        a = listaCircular.getValor(0);
-        System.out.println(a);
-        String json;
-
-        BufferedReader br = new BufferedReader(new FileReader("cards.json"));
-        try {
-            StringBuilder sb = new StringBuilder();
-            String line = br.readLine();
-
-            while (line != null) {
-                sb.append(line);
-                sb.append(System.lineSeparator());
-                line = br.readLine();
-            }
-
-            json = sb.toString();
-        } finally {
-            br.close();
-        }
-        JsonNode node = Json.parse(json);
-        C2 = node.get("Cards").get(a).get("Imagen").asText();
-
-        Image image1 = new Image(getClass().getResourceAsStream("Images/E_Reina.png"));
-        Image imageMano = new Image(getClass().getResourceAsStream(C2));
-        Image imagePila = new Image(getClass().getResourceAsStream("Images/PilaDeCartas.png"));
-        Image imageButleft = new Image(getClass().getResourceAsStream("Images/BotonA.png"));
-        Image imageButright = new Image(getClass().getResourceAsStream("Images/BotonS.png"));
-
-        IVspecial.setFitHeight(285);
-        IVspecial.setFitWidth(650);
-        IVspecial.setX(-125);
-        IVspecial.setY(5);
-
-        ImageView pilaCartas = new ImageView(imagePila);
-        pilaCartas.setFitWidth(130);
-        pilaCartas.setFitHeight(120);
-
-        ImageView IVmano = new ImageView(imageMano);
-        IVmano.setFitHeight(185);
-        IVmano.setFitWidth(430);
-        IVmano.setX(-19);
-        IVmano.setY(300);
-
-        ImageView IVanterior = new ImageView(imageButleft);
-        IVanterior.setFitHeight(30);
-        IVanterior.setFitWidth(60);
-
-        ImageView IVsiguiente = new ImageView(imageButright);
-        IVsiguiente.setFitHeight(30);
-        IVsiguiente.setFitWidth(60);
-
-
-        Button butleft = new Button();
-        butleft.setGraphic(IVanterior);
-
-        Button butright = new Button();
-        butright.setGraphic(IVsiguiente);
-
-        Button invocar = new Button("Invocar");
-        invocar.setMinSize(85,37);
-
-        Button pila = new Button("Tomar carta");
-        pila.setMinSize(24,37);
-
-        Button historial = new Button("Historial");
-        historial.setMinSize(80,37);
-
-        Button salto = new Button("Saltar Turno");
-        //salto.setGraphic(imageView);
-        salto.setMinSize(24,37);
-
-        HBox hBoxJugar1 = new HBox(128,butleft,butright);
-
-        HBox hBoxJugar2 = new HBox(128,invocar,salto);
-
-        VBox vBoxInfo = new VBox(30,historial,labVida,labMana);
-
-        VBox vBoxPila = new VBox(15,pila,pilaCartas);
-
-        Contenedor.getChildren().addAll(hBoxJugar1,hBoxJugar2,vBoxInfo,vBoxPila,input,IVspecial,IVmano,Mensajes);
-
-        AnchorPane.setLeftAnchor(Mensajes,42d);
-        AnchorPane.setTopAnchor(Mensajes,40d);
-
-        AnchorPane.setLeftAnchor(hBoxJugar1,53d);
-        AnchorPane.setBottomAnchor(hBoxJugar1,110d);
-
-        AnchorPane.setLeftAnchor(hBoxJugar2,42d);
-        AnchorPane.setBottomAnchor(hBoxJugar2,40d);
-
-        AnchorPane.setRightAnchor(vBoxPila,15d);
-        AnchorPane.setBottomAnchor(vBoxPila,15d);
-
-        AnchorPane.setLeftAnchor(input,48d);
-        AnchorPane.setBottomAnchor(input,205d);
-
-        AnchorPane.setTopAnchor(vBoxInfo,50d);
-        AnchorPane.setRightAnchor(vBoxInfo,70d);
-
-        input.setOnAction(event ->{
-            String mensaje = Rol ? "Servidor: " : "Cliente: ";
-            mensaje+=input.getText();
-            input.clear();
-
-            Mensajes.appendText(mensaje+"\n");
-            /**
-             * Se mantiene en constante comunicacion cada vez que se envia un mensaje, si falla, un mensaje de error sera enviado
-             */
-            try {
-                comunicacion.send(mensaje);                  //   ===== Excepcion 1 : Si el mensaje no encuentra destinatario el envío falla =====
-
-            } catch (Exception e) {
-                Mensajes.appendText("Fallo del envio"+"\n");
-            }
-
-        });
-        Scene scene = new Scene(Contenedor,550,500);
-        primaryStage.setScene(scene);
-        
-
-        return scene;
     }
 
     /**
