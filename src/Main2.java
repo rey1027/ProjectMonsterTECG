@@ -19,6 +19,7 @@ import javafx.scene.Scene;
 import com.fasterxml.jackson.databind.JsonNode;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.sql.ClientInfoStatus;
 
 
 //Prueba de branch 2
@@ -41,6 +42,7 @@ public class Main2 extends Application {
         }
         return cartaAleatoriaJ1  ;
     }
+
 
     /**
      * Variables de Prueba
@@ -90,16 +92,104 @@ public class Main2 extends Application {
      * Parte de la interfaz y activadores del envio de mensajes
      * @return La ventana del chat(root)
      */
-    private Scene ContenidoScene(){
+
+    private Scene ContenidoScene() throws Exception{
+        Stack deckJ1 = new Stack();
+        ListaCircular listaCircular = new ListaCircular();
+        //Stack deckJ2 = new Stack();
+        try {
+            String json;
+
+            BufferedReader br = new BufferedReader(new FileReader("cards.json"));
+            try {
+                StringBuilder sb = new StringBuilder();
+                String line = br.readLine();
+
+                while (line != null) {
+                    sb.append(line);
+                    sb.append(System.lineSeparator());
+                    line = br.readLine();
+                }
+
+                json = sb.toString();
+            } finally {
+                br.close();
+            }
+
+
+            // PARSE JSON TO STRING
+            String[] cartasGeneradasJ1 = generarCartasAleatorias1(16);
+
+            for (int i = 0; i < cartasGeneradasJ1.length; i++) {
+                deckJ1.push(cartasGeneradasJ1[i]);
+
+            }
+            System.out.println(deckJ1);
+
+            JsonNode node = Json.parse(json);
+            //String j2 = cartasGeneradasJ2[i];
+            //String C2 = node.get("Cards").get(j2).get("Mana").asText();
+            //System.out.println(C2);
+
+            String cartaJ1 = deckJ1.peek();
+            listaCircular.agregarAlFinal(cartaJ1);
+            deckJ1.pop();
+            System.out.println("La primera carta es: " + cartaJ1);
+            System.out.println(deckJ1);
+            cartaJ1 = deckJ1.peek();
+            listaCircular.agregarAlFinal(cartaJ1);
+            deckJ1.pop();
+            System.out.println("La primera carta es: " + cartaJ1);
+            System.out.println(deckJ1);
+            cartaJ1 = deckJ1.peek();
+            listaCircular.agregarAlFinal(cartaJ1);
+            deckJ1.pop();
+            System.out.println("La primera carta es: " + cartaJ1);
+            System.out.println(deckJ1);
+            cartaJ1 = deckJ1.peek();
+            listaCircular.agregarAlFinal(cartaJ1);
+            deckJ1.pop();
+            System.out.println("La primera carta es: " + cartaJ1);
+            System.out.println(deckJ1);
+            listaCircular.listar();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         Stage primaryStage = new Stage();
         AnchorPane Contenedor = new AnchorPane();
         TextField input= new TextField();
         input.setMinSize(285,10);
         Mensajes.setPrefHeight(25);
         Mensajes.setId("textarea-messages");
+        String a;
+        String C2;
+
+        a = listaCircular.getValor(0);
+        System.out.println(a);
+        String json;
+
+        BufferedReader br = new BufferedReader(new FileReader("cards.json"));
+        try {
+            StringBuilder sb = new StringBuilder();
+            String line = br.readLine();
+
+            while (line != null) {
+                sb.append(line);
+                sb.append(System.lineSeparator());
+                line = br.readLine();
+            }
+
+            json = sb.toString();
+        } finally {
+            br.close();
+        }
+        JsonNode node = Json.parse(json);
+        C2 = node.get("Cards").get(a).get("Imagen").asText();
 
         Image image1 = new Image(getClass().getResourceAsStream("Images/E_Reina.png"));
-        Image imageMano = new Image(getClass().getResourceAsStream("Images/E_Gigante.png"));
+        Image imageMano = new Image(getClass().getResourceAsStream(C2));
         Image imagePila = new Image(getClass().getResourceAsStream("Images/PilaDeCartas.png"));
         Image imageButleft = new Image(getClass().getResourceAsStream("Images/BotonA.png"));
         Image imageButright = new Image(getClass().getResourceAsStream("Images/BotonS.png"));
@@ -198,6 +288,7 @@ public class Main2 extends Application {
 
         return scene;
     }
+
     /**
      * Iniciador de la concexion
      */
@@ -268,6 +359,8 @@ public class Main2 extends Application {
                                 label1.setText("El puerto debe ser menor a 65536 y no debe estar ocupado");
 
 
+                            } catch (Exception exception) {
+                                exception.printStackTrace();
                             }
                         }
                         catch(NumberFormatException ex){
@@ -343,6 +436,8 @@ public class Main2 extends Application {
                             label1.setText("Direccion ip invalida");
 
 
+                        } catch (Exception exception) {
+                            exception.printStackTrace();
                         }
 
                     }
@@ -471,77 +566,12 @@ public class Main2 extends Application {
     }
     public static void main(String[]args){
 
-        Stack deckJ1 = new Stack();
-        Stack deckJ2 = new Stack();
-
-        try{
-            String json;
-
-            BufferedReader br = new BufferedReader(new FileReader("cards.json"));
-            try{
-                StringBuilder sb = new StringBuilder();
-                String line = br.readLine();
-
-                while(line != null){
-                    sb.append(line);
-                    sb.append(System.lineSeparator());
-                    line = br.readLine();
-                }
-
-                json = sb.toString();
-            } finally {
-                br.close();
-            }
 
 
-            // PARSE JSON TO STRING
-            String[] cartasGeneradasJ1 = generarCartasAleatorias1(16);
-            String[] cartasGeneradasJ2 = generarCartasAleatorias1(16);
-
-            for (int i = 0; i < cartasGeneradasJ1.length; i++) {
-                deckJ1.push(cartasGeneradasJ1[i]);
-
-            }
-            System.out.println(deckJ1);
-
-            for (int i = 0; i < cartasGeneradasJ2.length; i++) {
-                deckJ2.push(cartasGeneradasJ2[i]);
-
-               try{
-                    JsonNode node = Json.parse(json);
-                    String j2 = cartasGeneradasJ2[i];
-                    String C2 = node.get("Cards").get(j2).get("Mana").asText();
-                    //System.out.println(C2);
-                }catch (Exception e){
-                    e.printStackTrace();
-                   System.out.println("No Funciona JSon");
-                }
-
-            }
-            System.out.println(deckJ2);
-
-            String cartaJ1 = deckJ1.peek();
-            deckJ1.pop();
-            System.out.println("La primera carta es: " + cartaJ1);
-            System.out.println(deckJ1);
-            cartaJ1 = deckJ1.peek();
-            deckJ1.pop();
-            System.out.println("La primera carta es: " + cartaJ1);
-            System.out.println(deckJ1);
-            cartaJ1 = deckJ1.peek();
-            deckJ1.pop();
-            System.out.println("La primera carta es: " + cartaJ1);
-            System.out.println(deckJ1);
-            cartaJ1 = deckJ1.peek();
-            deckJ1.pop();
-            System.out.println("La primera carta es: " + cartaJ1);
-            System.out.println(deckJ1);
 
 
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
+
+
 
         launch(args);
 

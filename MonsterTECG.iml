@@ -11,5 +11,6 @@
     <orderEntry type="library" name="jackson-databind-2.11.3" level="project" />
     <orderEntry type="library" name="jackson-core-2.11.3" level="project" />
     <orderEntry type="library" name="jackson-annotations-2.11.3" level="project" />
+    <orderEntry type="library" name="lib" level="project" />
   </component>
 </module>
