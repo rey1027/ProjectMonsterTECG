@@ -65,7 +65,7 @@ public class Main2 extends Application {
 
     final String Congelar = "Rayo de Escarcha";
     final String Curar = "Toque de Sanación";
-    final String Explosión = "Explosión Arena";
+    final String Explosion = "Explosión Arena";
     final String Favor = "Favor Divino";
     final String Forma = "Forma Prohibida";
     final String Matriz = "Matriz de autodefensa";
@@ -102,7 +102,7 @@ public class Main2 extends Application {
     private Label labMana = new Label();
 
     private Button invocar = new Button("Invocar");
-    int efectoExplosión = 0;
+    int efectoExplosion = 0;
     boolean Doble = false;
 
     private Button pila = new Button("Tomar carta");
@@ -361,41 +361,43 @@ public class Main2 extends Application {
                     System.out.println(C7);
                     int C8 = node.get("Cards").get(invocada).get("Mana").asInt();
                     int C9 = node.get("Cards").get(invocada).get("Ataque").asInt();
-                    if (C7==Curar || C7==Portal){
-                        System.out.println(jugador.getVidaInt());
-                        jugador.Curacion(C9);
-                    }
+                    if(C8<=jugador.getManaInt()) {
+                        if (C7 == "Toque de Sanación") {
+                            System.out.println(jugador.getVidaInt());
+                            jugador.Curacion(C9);
+                        }
 
-                    if (C7==Explosión){
-                        efectoExplosión = 1;
-                    } else {
-                        efectoExplosión = 0;
-                        Doble = true;
-                    }
-                    listaCircular.removerPorPosicion(indiceMano.get());
-                    String mensaje = Rol ? "Servidor: " : "Cliente: ";
-                    mensaje+=C7;
-                    Mensajes.appendText(mensaje+" ha sido invocado(a)"+"\n");
-                    try {
-                        comunicacion.send(mensaje);
+                        if (C7 == Explosion) {
+                            efectoExplosion = 1;
+                        } else {
+                            efectoExplosion = 0;
+                            Doble = true;
+                        }
+                        listaCircular.removerPorPosicion(indiceMano.get());
+                        String mensaje = Rol ? "Servidor: " : "Cliente: ";
+                        mensaje += C7;
+                        Mensajes.appendText(mensaje + " ha sido invocado(a)" + "\n");
+                        try {
+                            comunicacion.send(mensaje);
 
-                    } catch (Exception e) {
-                        Mensajes.appendText("Fallo del envio"+"\n");
-                    }
+                        } catch (Exception e) {
+                            Mensajes.appendText("Fallo del envio" + "\n");
+                        }
 
-                    Image imageMano5 = new Image(getClass().getResourceAsStream(C5));
-                    IVspecial.setImage(imageMano5);
-                    jugador.gastarMana(C8);
-                    jugador.regenMana();
-                    labVida.setText("VIDA: "+jugador.getVida());
-                    labMana.setText("MANA: "+jugador.getMana());
-                    if (efectoExplosión!=1){
-                        Congelado();
-                    }
+                        Image imageMano5 = new Image(getClass().getResourceAsStream(C5));
 
-                } catch (Exception exception) {
-                    exception.printStackTrace();
-                }
+                        IVspecial.setImage(imageMano5);
+                        jugador.gastarMana(C8);
+                        jugador.regenMana();
+                        labVida.setText("VIDA: " + jugador.getVida());
+                        labMana.setText("MANA: " + jugador.getMana());
+                        if (efectoExplosion != 1) {
+                            Congelado();
+                        }
+                    }
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
 
             });
 
@@ -832,7 +834,7 @@ public class Main2 extends Application {
                     case "Servidor: "+Curar:
                         Mensajes.appendText(data.toString()+" invocado(a)"+"\n");
                         break;
-                    case "Servidor: "+Explosión:
+                    case "Servidor: "+ Explosion:
                         Mensajes.appendText(data.toString()+" invocado(a)"+"\n");
                         break;
                     default:
