@@ -63,6 +63,27 @@ public class Main2 extends Application {
     final String Rey = "El Rey Exámine";
     final String Sacerdotisa = "Sacerdotisa de Furia";
 
+    final String Congelar = "Rayo de Escarcha";
+    final String Curar = "Toque de Sanación";
+    final String Explosión = "Explosión Arena";
+    final String Favor = "Favor Divino";
+    final String Forma = "Forma Prohibida";
+    final String Matriz = "Matriz de autodefensa";
+    final String PoderSupremo = "Cubo rompecabezas de Yogg-Saron";
+    final String Portal= "Portal de Claro de la Luna";
+    final String Purificar = "Purificar";
+    final String Roba = "Robo de ideas";
+
+    final String Almacen = "El Alma-cén";
+    final String Brote = "Brote de jade";
+    final String Comunion = "Comunión astral";
+    final String Hacerse = "Hacerse el muerto";
+    final String Lluvia = "Lluvia de estrellas";
+    final String Lunar = "Eclipse lunar";
+    final String CMana = "Maná viviente";
+    final String Parejo= "Tajo parejo";
+    final String Quemadura = "Quemadura de maná";
+    final String Solar = "Eclipse Solar";
 
     /**
      * La variable que controla la ejecucion del Servidor o el Cliente.
@@ -80,6 +101,45 @@ public class Main2 extends Application {
 
     private Label labMana = new Label();
 
+    private Button invocar = new Button("Invocar");
+    int efectoExplosión = 0;
+    boolean Doble = false;
+
+    private Button pila = new Button("Tomar carta");
+    /***
+    Image IGandling = new Image(getClass().getResourceAsStream("Images/E_Gandling.png"));
+    Image IGigante = new Image(getClass().getResourceAsStream("Images/E_Gigante.png"));
+    Image IGran = new Image(getClass().getResourceAsStream("Images/E_Gran.png"));
+    Image IMal = new Image(getClass().getResourceAsStream("Images/E_Mal.png"));
+    Image IMicro = new Image(getClass().getResourceAsStream("Images/E_Micro.png"));
+    Image IPescador = new Image(getClass().getResourceAsStream("Images/E_Pescador.png"));
+    Image IPlastabot = new Image(getClass().getResourceAsStream("Images/E_Plastabot.png"));
+    Image IReina = new Image(getClass().getResourceAsStream("Images/E_Reina.png"));
+    Image IRey = new Image(getClass().getResourceAsStream("Images/E_Rey.png"));
+    Image ISacerdotisa = new Image(getClass().getResourceAsStream("Images/E_Sacerdotisa.png"));
+
+    Image ICongelar = new Image(getClass().getResourceAsStream("Images/E_Congelar.png"));
+    Image ICurar = new Image(getClass().getResourceAsStream("Images/E_Curar.png"));
+    Image IExplosion = new Image(getClass().getResourceAsStream("Images/E_Explosion.png"));
+    Image IFavor = new Image(getClass().getResourceAsStream("Images/E_Favor.png"));
+    Image IForma = new Image(getClass().getResourceAsStream("Images/E_Forma.png"));
+    Image IMatriz = new Image(getClass().getResourceAsStream("Images/E_Matriz.png"));
+    Image IPoderSupremo = new Image(getClass().getResourceAsStream("Images/E_PoderSupremo.png"));
+    Image IPortal = new Image(getClass().getResourceAsStream("Images/E_Portal.png"));
+    Image IPurificar = new Image(getClass().getResourceAsStream("Images/E_Purificar.png"));
+    Image IRoba = new Image(getClass().getResourceAsStream("Images/E_Roba.png"));
+
+    Image IAlmacen = new Image(getClass().getResourceAsStream("Images/E_Almacen.png"));
+    Image IBrote = new Image(getClass().getResourceAsStream("Images/E_Brote.png"));
+    Image IComunion = new Image(getClass().getResourceAsStream("Images/E_Comunion.png"));
+    Image IHacerse = new Image(getClass().getResourceAsStream("Images/E_Hacerse.png"));
+    Image ILluvia = new Image(getClass().getResourceAsStream("Images/E_Lluvia.png"));
+    Image ILunar = new Image(getClass().getResourceAsStream("Images/E_Lunar.png"));
+    Image IMana = new Image(getClass().getResourceAsStream("Images/E_Mana.png"));
+    Image IParejo = new Image(getClass().getResourceAsStream("Images/E_Parejo.png"));
+    Image IQuemadura = new Image(getClass().getResourceAsStream("Images/E_Quemadura.png"));
+    Image ISolar = new Image(getClass().getResourceAsStream("Images/E_Solar.png"));
+     ***/
     /**
      * Instancia a un nuevo juegador
      */
@@ -250,10 +310,10 @@ public class Main2 extends Application {
             Button butright = new Button();
             butright.setGraphic(IVsiguiente);
 
-            Button invocar = new Button("Invocar");
+
             invocar.setMinSize(85,37);
 
-            Button pila = new Button("Tomar carta");
+
             pila.setMinSize(24,37);
 
             Button historial = new Button("Historial");
@@ -291,28 +351,28 @@ public class Main2 extends Application {
             AnchorPane.setTopAnchor(vBoxInfo,50d);
             AnchorPane.setRightAnchor(vBoxInfo,70d);
 
-            input.setOnAction(event ->{
-                String mensaje = Rol ? "Servidor: " : "Cliente: ";
-                mensaje+=input.getText();
-                input.clear();
-
-                Mensajes.appendText(mensaje+"\n");
-                try {
-                    comunicacion.send(mensaje);
-
-                } catch (Exception e) {
-                    Mensajes.appendText("Fallo del envio"+"\n");
-                }
-
-            });
-
             invocar.setOnAction(event ->{
                 try {
+
                     String invocada= listaCircular.getValor(indiceMano.get());
                     String C5 = node.get("Cards").get(invocada).get("Imagen").asText();
                     String C6 = node.get("Cards").get(invocada).get("Tipo").asText();
                     String C7 = node.get("Cards").get(invocada).get("Nombre").asText();
+                    System.out.println(C7);
+                    int C8 = node.get("Cards").get(invocada).get("Mana").asInt();
+                    int C9 = node.get("Cards").get(invocada).get("Ataque").asInt();
+                    if (C7==Curar || C7==Portal){
+                        System.out.println(jugador.getVidaInt());
+                        jugador.Curacion(C9);
+                    }
 
+                    if (C7==Explosión){
+                        efectoExplosión = 1;
+                    } else {
+                        efectoExplosión = 0;
+                        Doble = true;
+                    }
+                    listaCircular.removerPorPosicion(indiceMano.get());
                     String mensaje = Rol ? "Servidor: " : "Cliente: ";
                     mensaje+=C7;
                     Mensajes.appendText(mensaje+" ha sido invocado(a)"+"\n");
@@ -325,9 +385,32 @@ public class Main2 extends Application {
 
                     Image imageMano5 = new Image(getClass().getResourceAsStream(C5));
                     IVspecial.setImage(imageMano5);
+                    jugador.gastarMana(C8);
+                    jugador.regenMana();
+                    labVida.setText("VIDA: "+jugador.getVida());
+                    labMana.setText("MANA: "+jugador.getMana());
+                    if (efectoExplosión!=1){
+                        Congelado();
+                    }
+
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
+
+            });
+
+            salto.setOnAction(event ->{
+                Mensajes.appendText("Turno saltado"+"\n");
+                try {
+                    comunicacion.send("");
+
+                } catch (Exception e) {
+                    Mensajes.appendText("Fallo del envio"+"\n");
+                }
+                jugador.regenMana();
+                labVida.setText("VIDA: "+jugador.getVida());
+                labMana.setText("MANA: "+jugador.getMana());
+
 
             });
 
@@ -375,6 +458,7 @@ public class Main2 extends Application {
                 String cartaJ1 = deckJ1.peek();
                 listaCircular.agregarAlFinal(cartaJ1);
                 deckJ1.pop();
+                PilaCongelada();
             });
 
             Scene scene = new Scene(Contenedor,550,500);
@@ -582,59 +666,91 @@ public class Main2 extends Application {
 
         labVida.setText("VIDA: "+jugador.getVida());
         labMana.setText("MANA: "+jugador.getMana());
+        Image IGandling = new Image(getClass().getResourceAsStream("Images/E_Gandling.png"));
         return new Servidor(p2, data->{
             Platform.runLater(() ->{
-
+                Descongelado();
                 switch(data.toString())
                 {
                     //Monstruos
                     case "Cliente: "+Gandling:
-                        Mensajes.appendText(data.toString()+" invocado"+"\n");
+                        Mensajes.appendText(data.toString()+" invocado(a)"+"\n");
                         jugador.recibirAtaque(140);
+                        //IVspecial.setImage(IGandling);
                         break;
                     case "Cliente: "+Gigante:
-                        Mensajes.appendText(data.toString()+" invocado"+"\n");
+                        Mensajes.appendText(data.toString()+" invocado(a)"+"\n");
                         jugador.recibirAtaque(200);
+                        //IVspecial.setImage(IGandling);
                         break;
                     case "Cliente: "+Gran:
-                        Mensajes.appendText(data.toString()+" invocado"+"\n");
+                        Mensajes.appendText(data.toString()+" invocado(a)"+"\n");
                         jugador.recibirAtaque(170);
+                        //IVspecial.setImage(IGandling);
                         break;
                     case "Cliente: "+Mal:
-                        Mensajes.appendText(data.toString()+" invocado"+"\n");
+                        Mensajes.appendText(data.toString()+" invocado(a)"+"\n");
                         jugador.recibirAtaque(510);
+                        //IVspecial.setImage(IGandling);
                         break;
                     case "Cliente: "+Micro:
-                        Mensajes.appendText(data.toString()+" invocado"+"\n");
+                        Mensajes.appendText(data.toString()+" invocado(a)"+"\n");
                         jugador.recibirAtaque(70);
+                        //IVspecial.setImage(IGandling);
                         break;
                     case "Cliente: "+Pescador:
-                        Mensajes.appendText(data.toString()+" invocado"+"\n");
+                        Mensajes.appendText(data.toString()+" invocado(a)"+"\n");
                         jugador.recibirAtaque(100);
+                        //IVspecial.setImage(IGandling);
                         break;
                     case "Cliente: "+Plastabot:
-                        Mensajes.appendText(data.toString()+" invocado"+"\n");
+                        Mensajes.appendText(data.toString()+" invocado(a)"+"\n");
                         jugador.recibirAtaque(50);
-                        System.out.println(jugador.getMana());
+                        //IVspecial.setImage(IGandling);
                         break;
                     case "Cliente: "+Reina:
-                        Mensajes.appendText(data.toString()+" invocado"+"\n");
+                        Mensajes.appendText(data.toString()+" invocado(a)"+"\n");
                         jugador.recibirAtaque(150);
+                        //IVspecial.setImage(IGandling);
                         break;
                     case "Cliente: "+Rey:
-                        Mensajes.appendText(data.toString()+" invocado"+"\n");
+                        Mensajes.appendText(data.toString()+" invocado(a)"+"\n");
                         jugador.recibirAtaque(300);
+                        //IVspecial.setImage(IGandling);
                         break;
                     case "Cliente: "+Sacerdotisa:
-                        Mensajes.appendText(data.toString()+" invocado"+"\n");
+                        Mensajes.appendText(data.toString()+" invocado(a)"+"\n");
                         jugador.recibirAtaque(110);
+                        //IVspecial.setImage(IGandling);
                         break;
 
                     default:
-                        System.out.println("holi");
+                        Mensajes.appendText("El rival ha saltado su turno"+"\n");
                 }
+                if (jugador.getVidaInt()<1){
+                    try {
+                        comunicacion.Cerrar_C();
+                        AnchorPane Victoria = new AnchorPane();
+                        Stage stageVictoria = new Stage();
+                        //stageVictoria.setTitle("Dirección IP del Servidor");
+                        stageVictoria.setWidth(200);
+                        stageVictoria.setHeight(118);
+                        Label labVictoria = new Label("Fin del Juego");
+                        Victoria.getChildren().addAll(labVictoria);
+                        AnchorPane.setLeftAnchor(labVictoria,60d);
+                        AnchorPane.setTopAnchor(labVictoria,30d);
+                        Scene scene2 = new Scene(Victoria);
+                        stageVictoria.setScene(scene2);
+                        stageVictoria.show();
+
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+                }
+
                 //IVspecial.setImage(imagePrueba);
-                Mensajes.appendText(data.toString()+"\n");
+                labVida.setText("VIDA: "+jugador.getVida());
+                labMana.setText("MANA: "+jugador.getMana());
 
 
 
@@ -651,6 +767,7 @@ public class Main2 extends Application {
         labVida.setText("VIDA: "+jugador.getVida());
         labMana.setText("MANA: "+jugador.getMana());
         return new Cliente(ip, puerto, data->{
+            Descongelado();
             Platform.runLater(() ->{
 
                 //IVspecial.setImage(imagePrueba);
@@ -659,59 +776,69 @@ public class Main2 extends Application {
                 {
                     //Monstruos
                     case "Servidor: "+Gandling:
-                        Mensajes.appendText(data.toString()+" invocado"+"\n");
-                        jugador.recibirAtaque(140);
+                        Mensajes.appendText(data.toString()+" invocado(a)"+"\n");
+                        if (Doble){jugador.recibirAtaque(140*2);}
+                        else {jugador.recibirAtaque(140);}
                         break;
                     case "Servidor: "+Gigante:
-                        Mensajes.appendText(data.toString()+" invocado"+"\n");
-                        jugador.recibirAtaque(200);
+                        Mensajes.appendText(data.toString()+" invocado(a)"+"\n");
+                        if (Doble){jugador.recibirAtaque(200*2);}
+                        else {jugador.recibirAtaque(200);}
                         break;
                     case "Servidor: "+Gran:
-                        Mensajes.appendText(data.toString()+" invocado"+"\n");
-                        jugador.recibirAtaque(170);
+                        Mensajes.appendText(data.toString()+" invocado(a)"+"\n");
+                        if (Doble){jugador.recibirAtaque(170*2);}
+                        else {jugador.recibirAtaque(170);}
                         break;
                     case "Servidor: "+Mal:
-                        Mensajes.appendText(data.toString()+" invocado"+"\n");
-                        jugador.recibirAtaque(510);
+                        Mensajes.appendText(data.toString()+" invocado(a)"+"\n");
+                        if (Doble){jugador.recibirAtaque(1000);}
+                        else {jugador.recibirAtaque(510);}
                         break;
                     case "Servidor: "+Micro:
-                        Mensajes.appendText(data.toString()+" invocado"+"\n");
-                        jugador.recibirAtaque(70);
+                        Mensajes.appendText(data.toString()+" invocado(a)"+"\n");
+                        if (Doble){jugador.recibirAtaque(70*2);}
+                        else {jugador.recibirAtaque(70);}
                         break;
                     case "Servidor: "+Pescador:
-                        Mensajes.appendText(data.toString()+" invocado"+"\n");
-                        jugador.recibirAtaque(100);
+                        Mensajes.appendText(data.toString()+" invocado(a)"+"\n");
+                        if (Doble){jugador.recibirAtaque(100*2);}
+                        else {jugador.recibirAtaque(100);}
                         break;
                     case "Servidor: "+Plastabot:
-                        Mensajes.appendText(data.toString()+" invocado"+"\n");
-                        jugador.recibirAtaque(50);
-                        System.out.println(jugador.getMana());
+                        Mensajes.appendText(data.toString()+" invocado(a)"+"\n");
+                        if (Doble){jugador.recibirAtaque(50*2);}
+                        else {jugador.recibirAtaque(50);}
                         break;
                     case "Servidor: "+Reina:
-                        Mensajes.appendText(data.toString()+" invocado"+"\n");
-                        jugador.recibirAtaque(150);
+                        Mensajes.appendText(data.toString()+" invocado(a)"+"\n");
+                        if (Doble){jugador.recibirAtaque(150*2);}
+                        else {jugador.recibirAtaque(150);}
                         break;
                     case "Servidor: "+Rey:
-                        Mensajes.appendText(data.toString()+" invocado"+"\n");
-                        jugador.recibirAtaque(300);
+                        Mensajes.appendText(data.toString()+" invocado(a)"+"\n");
+                        if (Doble){jugador.recibirAtaque(300*2);}
+                        else {jugador.recibirAtaque(300);}
                         break;
                     case "Servidor: "+Sacerdotisa:
-                        Mensajes.appendText(data.toString()+" invocado"+"\n");
-                        jugador.recibirAtaque(110);
+                        Mensajes.appendText(data.toString()+" invocado(a)"+"\n");
+                        if (Doble){jugador.recibirAtaque(110*2);}
+                        else {jugador.recibirAtaque(110);}
                         break;
-
+                    case "Servidor: "+Congelar:
+                        Mensajes.appendText(data.toString()+" invocado(a)"+"\n");
+                        Congelado();
+                        break;
+                    case "Servidor: "+Curar:
+                        Mensajes.appendText(data.toString()+" invocado(a)"+"\n");
+                        break;
+                    case "Servidor: "+Explosión:
+                        Mensajes.appendText(data.toString()+" invocado(a)"+"\n");
+                        break;
                     default:
-                        System.out.println("holi");
+                        Mensajes.appendText("El rival ha saltado su turno"+"\n");
                 }
-                if (data.equals("Servidor: sss")){
-                    System.out.println("YIIII");
-                    jugador.recibirAtaque(200);
-                    jugador.gastarMana(100);
-                    jugador.regenMana();
-
-
-                }
-
+                Doble =  false;
                 labVida.setText("VIDA: "+jugador.getVida());
                 labMana.setText("MANA: "+jugador.getMana());
 
@@ -720,6 +847,18 @@ public class Main2 extends Application {
 
             });
         });
+    }
+
+    private void Congelado() {
+        invocar.setDisable(true);
+        pila.setDisable(true);
+    }
+    private void PilaCongelada() {
+        pila.setDisable(true);
+    }
+    private void Descongelado() {
+        invocar.setDisable(false);
+        pila.setDisable(false);
     }
 
     /**

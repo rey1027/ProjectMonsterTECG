@@ -46,6 +46,12 @@ public class Jugador {
         return vidaString;
     }
 
+    public int getManaInt() {
+        return this.mana;
+    }
+    public int getVidaInt() {
+        return this.vida;
+    }
     /**
      * Metodo para obtener la vida
      * @param vida valor de la vida actual
@@ -69,5 +75,13 @@ public class Jugador {
      */
     public void setMana(int mana) {
         this.mana = mana;
+    }
+
+    public void Curacion(int cura){
+        if ((this.vida+cura)<=1000){
+            this.vida+=cura;
+        } else {
+            this.vida+=(1000-this.vida);
+        }
     }
 }
