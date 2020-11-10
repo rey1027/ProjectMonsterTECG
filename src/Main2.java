@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 
@@ -333,8 +334,8 @@ public class Main2 extends Application {
 
             Contenedor.getChildren().addAll(hBoxJugar1,hBoxJugar2,vBoxInfo,vBoxPila,input,IVspecial,IVmano,Mensajes);
 
-            AnchorPane.setLeftAnchor(Mensajes,42d);
-            AnchorPane.setTopAnchor(Mensajes,40d);
+            AnchorPane.setLeftAnchor(Mensajes,48d);
+            AnchorPane.setBottomAnchor(Mensajes,203d);
 
             AnchorPane.setLeftAnchor(hBoxJugar1,53d);
             AnchorPane.setBottomAnchor(hBoxJugar1,110d);
@@ -346,7 +347,7 @@ public class Main2 extends Application {
             AnchorPane.setBottomAnchor(vBoxPila,15d);
 
             AnchorPane.setLeftAnchor(input,48d);
-            AnchorPane.setBottomAnchor(input,205d);
+            AnchorPane.setBottomAnchor(input,-205d);
 
             AnchorPane.setTopAnchor(vBoxInfo,50d);
             AnchorPane.setRightAnchor(vBoxInfo,70d);
@@ -462,8 +463,13 @@ public class Main2 extends Application {
                 deckJ1.pop();
                 PilaCongelada();
             });
-
+            labVida.setStyle("-fx-text-fill: #fbff00;");
+            labMana.setStyle("-fx-text-fill: #fbff00;");
+            labVida.setFont(new Font("Console", 15));
+            labMana.setFont(new Font("Console", 15));
             Scene scene = new Scene(Contenedor,550,500);
+            scene.getStylesheets().add("foo/juegoStyle.css");
+
             primaryStage.setScene(scene);
 
 
@@ -491,8 +497,8 @@ public class Main2 extends Application {
 
         VBox MenuVBox = new VBox(20,LabAnfitrion,ButAnfitrion,LabInvitado,ButInvitado);
         Contenedor.getChildren().add(MenuVBox);
-        AnchorPane.setTopAnchor(MenuVBox,100d);
-        AnchorPane.setLeftAnchor(MenuVBox,100d);
+        AnchorPane.setTopAnchor(MenuVBox,30d);
+        AnchorPane.setLeftAnchor(MenuVBox,40d);
         EventHandler<ActionEvent> evento = new EventHandler<ActionEvent>() {
 
             /**
@@ -559,7 +565,7 @@ public class Main2 extends Application {
                 };
                 continuar.setOnAction(event);
                 Scene scene2 = new Scene(root2);
-
+                scene2.getStylesheets().add("foo/menuStyle.css");
                 MainStage.setScene(scene2);
                 MainStage.show();
             }
@@ -578,8 +584,8 @@ public class Main2 extends Application {
 
                 Stage MainStage = new Stage();
                 MainStage.setTitle("Dirección IP del Servidor");
-                MainStage.setWidth(300);
-                MainStage.setHeight(118);
+                MainStage.setWidth(200);
+                MainStage.setHeight(150);
                 VBox root2 = new VBox();
                 Label label1 = new Label("Ingrese una dirección ip válida");
                 Button continuar = new Button("Continuar");
@@ -638,6 +644,7 @@ public class Main2 extends Application {
                 };
                 continuar.setOnAction(event);
                 Scene scene2 = new Scene(root2);
+                scene2.getStylesheets().add("foo/menuStyle.css");
                 MainStage.setScene(scene2);
                 MainStage.show();
             }
@@ -645,7 +652,24 @@ public class Main2 extends Application {
 
         };
         ButInvitado.setOnAction(evento2);
-        Scene scene3 = new Scene(Contenedor,300,400);
+        Scene scene3 = new Scene(Contenedor,300,300);
+        //scene3.getStylesheets().add(getClass().getResource("Stylesheets/menuStyle").toExternalForm());
+        scene3.getStylesheets().add("foo/menuStyle.css");
+        LabAnfitrion.setStyle("-fx-text-fill: #fbff00;");
+        LabAnfitrion.setFont(new Font("Console", 22));
+
+        ButAnfitrion.setStyle("-fx-text-fill: #fbff00;");
+        ButAnfitrion.setFont(new Font("Console", 20));
+        ButAnfitrion.setMinSize(120,50);
+        ButAnfitrion.setStyle("-fx-background-color: Black;-fx-text-fill: #fbff00;");
+
+        LabInvitado.setStyle("-fx-text-fill: #fbff00;");
+        LabInvitado.setFont(new Font("Console", 22));
+
+        ButInvitado.setStyle("-fx-text-fill: #fbff00;");
+        ButInvitado.setFont(new Font("Console", 20));
+        ButInvitado.setMinSize(120,50);
+        ButInvitado.setStyle("-fx-background-color: Black;-fx-text-fill: #fbff00;");
         Menu.setScene(scene3);
         Menu.show();
     }
